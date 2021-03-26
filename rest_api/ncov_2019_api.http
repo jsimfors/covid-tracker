@@ -1,0 +1,2 @@
+POST {{baseUrl}}/token
+Authorization: Basic {{authorization}}
