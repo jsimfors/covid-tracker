@@ -47,11 +47,25 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _accessToken = '';
+  int _cases;
+  int _deaths;
 
   void _updateAccessToken() async {
     final apiService = APIService(API.sandbox());
     final accessToken = await apiService.getAccessToken();
-    setState(() => _accessToken = accessToken);
+    final cases = await apiService.getEndpointData(
+      accessToken: accessToken,
+      endpoint: Endpoint.cases,   
+    );
+    final deaths = await apiService.getEndpointData(
+      accessToken: accessToken,
+      endpoint: Endpoint.deaths,   
+    );
+    setState(() {
+      _accessToken = accessToken;
+      _cases = cases;
+      _deaths = deaths;
+    });
   }
 
   @override
@@ -89,10 +103,19 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'You have pushed the button this many times:',
+              'Number of cases:',
+            ),
+            if (_cases != null) // Collection-if statement
+            Text(
+              '$_cases',
+              style: Theme.of(context).textTheme.headline4,
             ),
             Text(
-              '$_accessToken',
+              'Number of deaths:',
+            ),
+            if (_deaths != null) // Collection-if statement
+            Text(
+              '$_deaths',
               style: Theme.of(context).textTheme.headline4,
             ),
           ],
