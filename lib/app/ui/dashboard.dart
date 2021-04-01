@@ -29,13 +29,16 @@ class _DashboardState extends State<Dashboard> {
       appBar: AppBar(
         title: Text('Coronavirus tracker'),
       ),
-      body: ListView(
-        children: <Widget>[
-          EndpointCard(
-            endpoint: Endpoint.cases,
-            value: _cases,
-          ),
-        ],
+      body: RefreshIndicator(
+        onRefresh: _updateData,
+              child: ListView(
+          children: <Widget>[
+            EndpointCard(
+              endpoint: Endpoint.cases,
+              value: _cases,
+            ),
+          ],
+        ),
       ),
     );
   }
