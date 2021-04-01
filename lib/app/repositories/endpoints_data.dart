@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:corona_stats_app/app/services/api.dart';
 import 'package:flutter/foundation.dart';
