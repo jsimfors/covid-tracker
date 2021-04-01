@@ -9,24 +9,42 @@ class DataRepository{
   final APIService apiService;
 
   String _accessToken;
-  Future<int> getEndpointData(Endpoint endpoint) async {
+
+  Future<int> getEndpointData(Endpoint endpoint) async => 
+  // wec call _getDataRefreshingToken to make the API call, getData is the argument function for this API-call.
+    await _getDataRefreshingToken<int>(
+    onGetData: () => apiService.getEndpointData(
+      accessToken: _accessToken, endpoint: endpoint),
+  );
+
+  Future<EndpointsData> getAllEndpointsData() async => 
+  // wec call _getDataRefreshingToken to make the API call, getData is the argument function for this API-call.
+    await _getDataRefreshingToken<EndpointsData>(
+    onGetData: _getAllEndpointsData,
+  );
+
+
+  Future<T> _getDataRefreshingToken<T>({Future<T> Function() onGetData}) async {
+  // Generic method to handle try and catch for both get endpointData and getAllEndpointsData.
+  // With this method we have only a single call in getEndpointData and _getAllEndpointsData.
+  // {Future<T> Function() onGetData} means we have a function as an argument, since we need different
+  // functios, for the different calls EndpointsData and allEndpointsData.
   try {
     if (_accessToken == null){
       _accessToken = await apiService.getAccessToken();
     }
-      return await apiService.getEndpointData(
-        accessToken: _accessToken, endpoint: endpoint
-      );
+      return await onGetData();
     } on Response catch (response) {
       if (response.statusCode == 401){
         // If the accesstoken has expired
           _accessToken = await apiService.getAccessToken();
-          return await apiService.getEndpointData(
-            accessToken: _accessToken, endpoint: endpoint
-          );
+          return await onGetData();
       } rethrow; // if we get neither code 200 or 401.
     }
   }
+
+
+
   Future<EndpointsData> _getAllEndpointsData() async {
     // To make all API-calls at once (instead of one after another)
     
