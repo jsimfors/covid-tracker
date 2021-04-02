@@ -1,6 +1,7 @@
 import 'package:corona_stats_app/app/repositories/endpoints_data.dart';
 import 'package:corona_stats_app/app/services/api.dart';
 import 'package:corona_stats_app/app/services/api_service.dart';
+import 'package:corona_stats_app/app/services/endpoint_data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 
@@ -10,18 +11,18 @@ class DataRepository{
 
   String _accessToken;
 
-  Future<int> getEndpointData(Endpoint endpoint) async => 
+  Future<EndpointData> getEndpointData(Endpoint endpoint) async => 
   // wec call _getDataRefreshingToken to make the API call, getData is the argument function for this API-call.
-    await _getDataRefreshingToken<int>(
-    onGetData: () => apiService.getEndpointData(
-      accessToken: _accessToken, endpoint: endpoint),
-  );
+    await _getDataRefreshingToken<EndpointData>(
+      onGetData: () => apiService.getEndpointData(
+          accessToken: _accessToken, endpoint: endpoint),
+    );
 
   Future<EndpointsData> getAllEndpointsData() async => 
   // wec call _getDataRefreshingToken to make the API call, getData is the argument function for this API-call.
     await _getDataRefreshingToken<EndpointsData>(
-    onGetData: _getAllEndpointsData,
-  );
+      onGetData: _getAllEndpointsData,
+    );
 
 
   Future<T> _getDataRefreshingToken<T>({Future<T> Function() onGetData}) async {
@@ -30,36 +31,36 @@ class DataRepository{
   // {Future<T> Function() onGetData} means we have a function as an argument, since we need different
   // functios, for the different calls EndpointsData and allEndpointsData.
   try {
-    if (_accessToken == null){
-      _accessToken = await apiService.getAccessToken();
-    }
-      return await onGetData();
-    } on Response catch (response) {
-      if (response.statusCode == 401){
-        // If the accesstoken has expired
+        if (_accessToken == null) {
+          _accessToken = await apiService.getAccessToken();
+        }
+        return await onGetData();
+      } on Response catch (response) {
+        // if unauthorized, get access token again
+        if (response.statusCode == 401) {
           _accessToken = await apiService.getAccessToken();
           return await onGetData();
-      } rethrow; // if we get neither code 200 or 401.
+        }
+        rethrow; // if we get neither 200 or 401.
+      }
     }
-  }
-
 
 
   Future<EndpointsData> _getAllEndpointsData() async {
     // To make all API-calls at once (instead of one after another)
-    
+
     final values = await Future.wait([
       // All different futures are exectued parallell.
       apiService.getEndpointData(
-        accessToken: _accessToken, endpoint: Endpoint.cases),
+          accessToken: _accessToken, endpoint: Endpoint.cases),
       apiService.getEndpointData(
-        accessToken: _accessToken, endpoint: Endpoint.casesSuspected),
+          accessToken: _accessToken, endpoint: Endpoint.casesSuspected),
       apiService.getEndpointData(
-        accessToken: _accessToken, endpoint: Endpoint.casesConfirmed),
+          accessToken: _accessToken, endpoint: Endpoint.casesConfirmed),
       apiService.getEndpointData(
-        accessToken: _accessToken, endpoint: Endpoint.deaths),
+          accessToken: _accessToken, endpoint: Endpoint.deaths),
       apiService.getEndpointData(
-        accessToken: _accessToken, endpoint: Endpoint.recovered)
+          accessToken: _accessToken, endpoint: Endpoint.recovered),
     ]);
     return EndpointsData(
       // values: a list of ints.
@@ -70,6 +71,6 @@ class DataRepository{
         Endpoint.deaths: values[3],
         Endpoint.recovered: values[4],
       },
-    );  
+    );
   }
-} 
+}
