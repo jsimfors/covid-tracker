@@ -1,5 +1,6 @@
 import 'package:corona_stats_app/app/services/api.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class EndpointCardData {
   EndpointCardData(this.title, this.assetName, this.color);
@@ -23,6 +24,13 @@ class EndpointCard extends StatelessWidget {
     Endpoint.recovered:  EndpointCardData('Recovered', 'assets/patient.png', Color(0xFF75acff)),
   };
 
+  String get formattedValue{
+    if (value == null) {
+      return '';
+    }
+    // Uses intl to add separator for large numbers
+    return NumberFormat('#,###,###,###').format(value);
+  }
   @override
   Widget build(BuildContext context) {
     final cardData = _cardsData[endpoint];
@@ -53,7 +61,7 @@ class EndpointCard extends StatelessWidget {
                   children: <Widget>[
                     Image.asset(cardData.assetName, color: cardData.color),
                     Text(
-                      value != null ? value.toString() : '',
+                      formattedValue,
                       style: Theme.of(context)
                       .textTheme
                       .headline5
