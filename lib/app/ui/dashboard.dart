@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:corona_stats_app/app/repositories/data_repositories.dart';
 import 'package:corona_stats_app/app/repositories/endpoints_data.dart';
 import 'package:corona_stats_app/app/services/api.dart';
+import 'package:corona_stats_app/app/ui/show_alert_dialog.dart';
 import 'package:corona_stats_app/app/ui/updated_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,9 +24,18 @@ class _DashboardState extends State<Dashboard> {
   }
 
   Future<void> _updateData() async {
+    try {
     final dataRepository = Provider.of<DataRepository>(context, listen: false);
     final endpointsData = await dataRepository.getAllEndpointsData();
     setState(() => _endpointsData = endpointsData);
+    } on SocketException catch (_) {
+      showAlertDialog(
+        context: context, 
+        title: 'Something went wrong 😬', 
+        content: 'Please check your connection or try again later.', 
+        defaultActionText: 'Nonsense! I want to try again!'
+      );
+    }
   }
 
   @override
