@@ -35,6 +35,13 @@ class _DashboardState extends State<Dashboard> {
         content: 'Please check your connection or try again later.', 
         defaultActionText: 'Nonsense! I want to try again!'
       );
+    } catch (_) { // if its not a Socket Exception.
+      showAlertDialog(
+        context: context, 
+        title: 'Unknown Error 😬', 
+        content: 'Please contact the support team or try again later', 
+        defaultActionText: 'Ok 😔'
+        );
     }
   }
 
