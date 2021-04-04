@@ -56,81 +56,48 @@ class _DashboardState extends State<Dashboard> {
                   ? _endpointsData.values[Endpoint.cases]?.date
                   : null,
       );
-    final header = 'Corona Stats';
+          return Scaffold(
+      appBar: AppBar(
+        title: Text('Coronavirus Tracker'),
+      ),
+      body: RefreshIndicator(
+        onRefresh: _updateData,
 
-      return  Scaffold(
-        appBar: AppBar(title: Text('Data Visualization'),),
-        body: Center(
-          child: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
-                child: Text(
-                header,
-                textAlign: TextAlign.center,
-                style: Theme.of(context)
-                  .textTheme
-                  .headline3
-                  .copyWith(color: Colors.white, fontWeight: FontWeight.w800),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
-                child: Text(
-                  'Visualization type:',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 0.8),
-                    fontSize: 16,
-                  )
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(onPressed: () {}, 
-                  child: Text('Bar chart 1'), 
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.purple,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                    textStyle: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold
-                    )
-                  ),
-                  ),
-                  ElevatedButton(onPressed: null, child: Text('Bar chart 2')),
-                  ElevatedButton(onPressed: null, child: Text('Bar chart 3')),
-                ],
-              ),
+        child: ListView(
+          children: <Widget>[
+            // Row 1 - Status text:
+            LastUpdatedStatusText(
+              text: formatter.lastUpdatedStatusText(),
+            ),
+            // Row 2 0 The chart
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+              children: [ 
+              Text('Corona Stats',
+              textAlign: TextAlign.center, 
+              style: Theme.of(context).textTheme.headline4),
+            ]),
+             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+ 
+              children: [ 
               GraphsCard(
               value: _endpointsData != null
                     ? _endpointsData.values[Endpoint.values[0]]?.value
                     : null,
-              ),
-               Padding(
-                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                 child: Text(
-                  'The data used:',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 0.8),
-                    fontSize: 18,
-                    
-                  )
-              ),
-               ),
-              for (var endpoint in Endpoint.values)
+              )],),
+            // Row 3 - the cards.
+            for (var endpoint in Endpoint.values)
               EndpointCard(
                 endpoint: endpoint,
                 value: _endpointsData != null
                     ? _endpointsData.values[endpoint]?.value
                     : null,
-              )
-            ],
-          )
-          
-          ),
-      );
+              ),
+          ],
+        ),
+      ),
+    );
   }
 }
