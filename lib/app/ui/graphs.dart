@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'dart:async';
+import 'dart:math';
+
 
 class SalesData {
   SalesData(this.year, this.sales);
@@ -65,3 +68,40 @@ class PieChart extends StatelessWidget {
                 );
   }
 }
+
+
+class BubbleChart extends StatelessWidget {
+    const BubbleChart ({Key key, this.value}) : super(key: key);
+    final int value;
+
+  Widget build(BuildContext context) { 
+    final List<BubbleChartData> bubbleChartData = [
+            BubbleChartData(2010, 65, 1.32, const Color.fromRGBO(255, 0, 255, 0.5)),
+            BubbleChartData(2011, 38, 4.21, const Color.fromRGBO(0, 0, 255, 0.7)),
+            BubbleChartData(2012, 34, 0.38, const Color.fromRGBO(0, 255, 255, 0.7)),
+            BubbleChartData(2013, 52, 9.29, const Color.fromRGBO(255, 255, 25, 0.7)),
+            BubbleChartData(2014, 40, 7.34, const Color.fromRGBO(255, 0, 255, 0.7))
+        ];
+        return  SfCartesianChart(
+                        series: <ChartSeries>[
+                            // Renders bubble chart
+                            BubbleSeries<BubbleChartData, double>(
+                                dataSource: bubbleChartData,
+                                sizeValueMapper: (BubbleChartData sales, _) => sales.size,
+                                pointColorMapper:(BubbleChartData sales, _) => sales.pointColor,
+                                minimumRadius:9, // Minimum radius of bubble
+                                maximumRadius: 30, // Maximum radius of bubble
+                                xValueMapper: (BubbleChartData sales, _) => sales.x,
+                                yValueMapper: (BubbleChartData sales, _) => sales.y
+                            )
+                        ]
+                    );
+  }
+}
+    class BubbleChartData {
+        BubbleChartData(this.x, this.y, this.size, this.pointColor);
+            final double x;
+            final double y;
+            final double size;
+            final Color pointColor;
+    }

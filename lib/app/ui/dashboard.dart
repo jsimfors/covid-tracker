@@ -18,7 +18,11 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   EndpointsData _endpointsData;
-  bool clickedButton = false;
+  bool showLineGraph = true;
+  bool showPieChart = false;
+  bool showBubbleChart = false;
+  // 0 line, 1 pie, 2 bubble.
+  List<bool> showGraphIndex = [true, false, false]; 
 
   @override
   void initState() {
@@ -58,7 +62,6 @@ class _DashboardState extends State<Dashboard> {
                   : null,
       );
     final header = 'Corona Stats';
-    
 
       return  Scaffold(
         appBar: AppBar(title: Text('Data Visualization'),),
@@ -79,7 +82,7 @@ class _DashboardState extends State<Dashboard> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
                 child: Text(
-                  'Visualization type: Clicked: ' + clickedButton.toString(),
+                  'Visualization type:',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color.fromRGBO(255, 255, 255, 0.8),
@@ -90,10 +93,14 @@ class _DashboardState extends State<Dashboard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [ // onPressed: () {},
-                  ElevatedButton(onPressed: () => setState(() => clickedButton = !clickedButton), 
-                  child: Text('Bar chart 1'), 
+                  ElevatedButton(onPressed: () => setState(() => {
+                    showLineGraph = !showLineGraph,
+                    showPieChart = false,
+                    showBubbleChart = false
+                    }), 
+                  child: Text('Linear Graph'), 
                   style: ElevatedButton.styleFrom(
-                    primary: clickedButton? Colors.purple : Colors.blue,
+                    primary: showLineGraph? Colors.purple : Colors.blue,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     textStyle: TextStyle(
                       fontSize: 12,
@@ -101,10 +108,14 @@ class _DashboardState extends State<Dashboard> {
                     )
                   ),
                   ),
-                  ElevatedButton(onPressed: () => setState(() => clickedButton = !clickedButton), 
-                  child: Text('Bar chart 2'),
+                  ElevatedButton(onPressed: () => setState(() => {
+                    showPieChart = !showPieChart,
+                    showLineGraph = false,
+                    showBubbleChart = false
+                    }), 
+                  child: Text('Pie Chart'),
                   style: ElevatedButton.styleFrom(
-                    primary: clickedButton? Colors.blue : Colors.purple,
+                    primary: showLineGraph? Colors.blue : Colors.purple,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     textStyle: TextStyle(
                       fontSize: 12,
@@ -112,21 +123,32 @@ class _DashboardState extends State<Dashboard> {
                     )
                     ),
                   ),
-                  ElevatedButton(onPressed: null, child: Text('Bar chart 3')),
+                  ElevatedButton(onPressed: () => setState(() => {
+                    showBubbleChart = !showBubbleChart,
+                    showPieChart = false,
+                    showLineGraph = false
+                    }), 
+                  child: Text('Bubble Chart')),
                 ],
               ),
-              clickedButton? 
-              PieChart(
+              if(showLineGraph)
+                LineGraph(
+                  value: _endpointsData != null
+                      ? _endpointsData.values[Endpoint.values[0]]?.value
+                      : null,
+                )
+              else if(showPieChart)
+                PieChart(
                 value: _endpointsData != null
-                    ? _endpointsData.values[Endpoint.values[0]]?.value
-                    : null,
-              )
-              :
-              LineGraph(
-              value: _endpointsData != null
-                    ? _endpointsData.values[Endpoint.values[0]]?.value
-                    : null,
-              ),
+                      ? _endpointsData.values[Endpoint.values[0]]?.value
+                      : null,
+                )else if(showBubbleChart)
+                 BubbleChart(
+                  value: _endpointsData != null
+                      ? _endpointsData.values[Endpoint.values[0]]?.value
+                      : null,
+                )else
+                Text('Choose a visualizationtype above'),
                Padding(
                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                  child: Text(
