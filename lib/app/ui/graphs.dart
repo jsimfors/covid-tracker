@@ -7,8 +7,8 @@ class SalesData {
   final double sales;
 }
 
-  class GraphsCard extends StatelessWidget {
-    const GraphsCard({Key key, this.value}) : super(key: key);
+class LineGraph extends StatelessWidget {
+    const LineGraph({Key key, this.value}) : super(key: key);
     final int value;
 
   Widget build(BuildContext context) {
@@ -33,5 +33,35 @@ class SalesData {
               )
             ],
     );
+  }
+}
+
+class ChartData {
+    ChartData(this.x, this.y, [this.color]);
+    final String x;
+    final double y;
+    final Color color;
+}
+
+class PieChart extends StatelessWidget {
+    const PieChart ({Key key, this.value}) : super(key: key);
+    final int value;
+
+  Widget build(BuildContext context) { final List<ChartData> chartData = [
+            ChartData('David', value.toDouble()*0.8),
+            ChartData('Steve', value.toDouble()*1.8),
+            ChartData('Jack', value.toDouble()),
+            ChartData('Others', value.toDouble()*1.2)
+        ];
+        return SfCircularChart(series: <CircularSeries>[
+                        // Render pie chart
+                        PieSeries<ChartData, String>(
+                            dataSource: chartData,
+                            pointColorMapper:(ChartData data,  _) => data.color,
+                            xValueMapper: (ChartData data, _) => data.x,
+                            yValueMapper: (ChartData data, _) => data.y
+                        )
+                    ]
+                );
   }
 }

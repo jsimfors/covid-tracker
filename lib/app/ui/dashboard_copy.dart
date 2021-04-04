@@ -62,7 +62,6 @@ class _DashboardState extends State<Dashboard> {
       ),
       body: RefreshIndicator(
         onRefresh: _updateData,
-
         child: ListView(
           children: <Widget>[
             // Row 1 - Status text:
@@ -82,7 +81,7 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
  
               children: [ 
-              GraphsCard(
+              LineGraph(
               value: _endpointsData != null
                     ? _endpointsData.values[Endpoint.values[0]]?.value
                     : null,

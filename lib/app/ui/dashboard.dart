@@ -18,6 +18,7 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   EndpointsData _endpointsData;
+  bool clickedButton = false;
 
   @override
   void initState() {
@@ -57,6 +58,7 @@ class _DashboardState extends State<Dashboard> {
                   : null,
       );
     final header = 'Corona Stats';
+    
 
       return  Scaffold(
         appBar: AppBar(title: Text('Data Visualization'),),
@@ -77,7 +79,7 @@ class _DashboardState extends State<Dashboard> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
                 child: Text(
-                  'Visualization type:',
+                  'Visualization type: Clicked: ' + clickedButton.toString(),
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Color.fromRGBO(255, 255, 255, 0.8),
@@ -87,11 +89,11 @@ class _DashboardState extends State<Dashboard> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(onPressed: () {}, 
+                children: [ // onPressed: () {},
+                  ElevatedButton(onPressed: () => setState(() => clickedButton = !clickedButton), 
                   child: Text('Bar chart 1'), 
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.purple,
+                    primary: clickedButton? Colors.purple : Colors.blue,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     textStyle: TextStyle(
                       fontSize: 12,
@@ -99,11 +101,28 @@ class _DashboardState extends State<Dashboard> {
                     )
                   ),
                   ),
-                  ElevatedButton(onPressed: null, child: Text('Bar chart 2')),
+                  ElevatedButton(onPressed: () => setState(() => clickedButton = !clickedButton), 
+                  child: Text('Bar chart 2'),
+                  style: ElevatedButton.styleFrom(
+                    primary: clickedButton? Colors.blue : Colors.purple,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    textStyle: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold
+                    )
+                    ),
+                  ),
                   ElevatedButton(onPressed: null, child: Text('Bar chart 3')),
                 ],
               ),
-              GraphsCard(
+              clickedButton? 
+              PieChart(
+                value: _endpointsData != null
+                    ? _endpointsData.values[Endpoint.values[0]]?.value
+                    : null,
+              )
+              :
+              LineGraph(
               value: _endpointsData != null
                     ? _endpointsData.values[Endpoint.values[0]]?.value
                     : null,
