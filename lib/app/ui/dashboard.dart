@@ -4,6 +4,7 @@ import 'package:corona_stats_app/app/repositories/endpoints_data.dart';
 import 'package:corona_stats_app/app/services/api.dart';
 import 'package:corona_stats_app/app/ui/show_alert_dialog.dart';
 import 'package:corona_stats_app/app/ui/updated_text.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'endpoint_card.dart';
@@ -54,12 +55,40 @@ class _DashboardState extends State<Dashboard> {
                   ? _endpointsData.values[Endpoint.cases]?.date
                   : null,
       );
-    return Scaffold(
+      /*
+      return Scaffold(
+    body: Center(
+      child: Container(
+        child: SfCartesianChart(
+          primaryXAxis: CategoryAxis(),
+          title: ChartTitle(text: 'Half yearly sales analysis'), //Chart title.
+          legend: Legend(isVisible: true), // Enables the legend.
+          tooltipBehavior: TooltipBehavior(enable: true), // Enables the tooltip.
+          series: <LineSeries<SalesData, String>>[
+            LineSeries<SalesData, String>(
+              dataSource: [
+                SalesData('Jan', 35),
+                SalesData('Feb', 28),
+                SalesData('Mar', 34),
+                SalesData('Apr', 32),
+                SalesData('May', 40)
+              ],
+              xValueMapper: (SalesData sales, _) => sales.year,
+              yValueMapper: (SalesData sales, _) => sales.sales,
+              dataLabelSettings: DataLabelSettings(isVisible: true) // Enables the data label.
+            )
+          ]
+        )
+      )
+    )
+  );*/
+  /*  return Scaffold(
       appBar: AppBar(
         title: Text('Coronavirus Tracker'),
       ),
       body: RefreshIndicator(
         onRefresh: _updateData,
+
         child: ListView(
           children: <Widget>[
             LastUpdatedStatusText(
@@ -75,6 +104,62 @@ class _DashboardState extends State<Dashboard> {
           ],
         ),
       ),
+    ); */
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Coronavirus Tracker'),
+      ),
+      body: RefreshIndicator(
+        onRefresh: _updateData,
+
+        child: ListView(
+          children: <Widget>[
+            // Row 1 - Status text:
+            LastUpdatedStatusText(
+              text: formatter.lastUpdatedStatusText(),
+            ),
+            // Row 2 0 The chart
+            Text('Corona Statistic Tracker',
+                style: Theme.of(context)
+                .textTheme
+                .headline4,
+                textAlign: TextAlign.center,
+                ),
+            SfCartesianChart(
+          primaryXAxis: CategoryAxis(),
+          title: ChartTitle(text: 'Data for last 6 months'), //Chart title.
+          legend: Legend(isVisible: true), // Enables the legend.
+          tooltipBehavior: TooltipBehavior(enable: true), // Enables the tooltip.
+          series: <LineSeries<SalesData, String>>[
+            LineSeries<SalesData, String>(
+              dataSource: [
+                SalesData('Jan', 290000000),
+                SalesData('Mar', 340000000),
+                SalesData('Apr', 320000000),
+                SalesData('May', 400000000)
+              ],
+              xValueMapper: (SalesData sales, _) => sales.year,
+              yValueMapper: (SalesData sales, _) => sales.sales,
+              dataLabelSettings: DataLabelSettings(isVisible: true) // Enables the data label.
+            )
+          ]),
+          // Row 3 - the cards.
+            for (var endpoint in Endpoint.values)
+              EndpointCard(
+                endpoint: endpoint,
+                value: _endpointsData != null
+                    ? _endpointsData.values[endpoint]?.value
+                    : null,
+              ),
+          ],
+        ),
+      ),
     );
   }
+}
+
+class SalesData {
+  SalesData(this.year, this.sales);
+  final String year;
+  final double sales;
 }
