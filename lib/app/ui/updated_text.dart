@@ -27,7 +27,9 @@ class LastUpdatedStatusText extends StatelessWidget {
         child: Text(
           text,
           textAlign: TextAlign.center,
-        ),
+          style: 
+            TextStyle(color: Color.fromRGBO(255, 255, 255, 0.4),)
+        )
     );
   }
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:corona_stats_app/app/repositories/data_repositories.dart';
 import 'package:corona_stats_app/app/repositories/endpoints_data.dart';
 import 'package:corona_stats_app/app/services/api.dart';
+import 'package:corona_stats_app/app/ui/graphs.dart';
 import 'package:corona_stats_app/app/ui/show_alert_dialog.dart';
 import 'package:corona_stats_app/app/ui/updated_text.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -55,6 +56,49 @@ class _DashboardState extends State<Dashboard> {
                   ? _endpointsData.values[Endpoint.cases]?.date
                   : null,
       );
+          return Scaffold(
+      appBar: AppBar(
+        title: Text('Coronavirus Tracker'),
+      ),
+      body: RefreshIndicator(
+        onRefresh: _updateData,
+
+        child: ListView(
+          children: <Widget>[
+            // Row 1 - Status text:
+            LastUpdatedStatusText(
+              text: formatter.lastUpdatedStatusText(),
+            ),
+            // Row 2 0 The chart
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+              children: [ 
+              Text('Corona Stats',
+              textAlign: TextAlign.center, 
+              style: Theme.of(context).textTheme.headline4),
+            ]),
+             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+ 
+              children: [ 
+              GraphsCard(
+              value: _endpointsData != null
+                    ? _endpointsData.values[Endpoint.values[0]]?.value
+                    : null,
+              )],),
+            // Row 3 - the cards.
+            for (var endpoint in Endpoint.values)
+              EndpointCard(
+                endpoint: endpoint,
+                value: _endpointsData != null
+                    ? _endpointsData.values[endpoint]?.value
+                    : null,
+              ),
+          ],
+        ),
+      ),
+    );
       /*
       return Scaffold(
     body: Center(
@@ -105,61 +149,6 @@ class _DashboardState extends State<Dashboard> {
         ),
       ),
     ); */
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Coronavirus Tracker'),
-      ),
-      body: RefreshIndicator(
-        onRefresh: _updateData,
 
-        child: ListView(
-          children: <Widget>[
-            // Row 1 - Status text:
-            LastUpdatedStatusText(
-              text: formatter.lastUpdatedStatusText(),
-            ),
-            // Row 2 0 The chart
-            Text('Corona Statistic Tracker',
-                style: Theme.of(context)
-                .textTheme
-                .headline4,
-                textAlign: TextAlign.center,
-                ),
-            SfCartesianChart(
-          primaryXAxis: CategoryAxis(),
-          title: ChartTitle(text: 'Data for last 6 months'), //Chart title.
-          legend: Legend(isVisible: true), // Enables the legend.
-          tooltipBehavior: TooltipBehavior(enable: true), // Enables the tooltip.
-          series: <LineSeries<SalesData, String>>[
-            LineSeries<SalesData, String>(
-              dataSource: [
-                SalesData('Jan', 290000000),
-                SalesData('Mar', 340000000),
-                SalesData('Apr', 320000000),
-                SalesData('May', 400000000)
-              ],
-              xValueMapper: (SalesData sales, _) => sales.year,
-              yValueMapper: (SalesData sales, _) => sales.sales,
-              dataLabelSettings: DataLabelSettings(isVisible: true) // Enables the data label.
-            )
-          ]),
-          // Row 3 - the cards.
-            for (var endpoint in Endpoint.values)
-              EndpointCard(
-                endpoint: endpoint,
-                value: _endpointsData != null
-                    ? _endpointsData.values[endpoint]?.value
-                    : null,
-              ),
-          ],
-        ),
-      ),
-    );
   }
-}
-
-class SalesData {
-  SalesData(this.year, this.sales);
-  final String year;
-  final double sales;
 }
