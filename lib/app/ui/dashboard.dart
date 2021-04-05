@@ -100,7 +100,7 @@ class _DashboardState extends State<Dashboard> {
                     }), 
                   child: Text('Linear Graph'), 
                   style: ElevatedButton.styleFrom(
-                    primary: showLineGraph? Colors.purple : Colors.blue,
+                    primary: showLineGraph? Colors.purple : Colors.grey,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     textStyle: TextStyle(
                       fontSize: 12,
@@ -115,7 +115,7 @@ class _DashboardState extends State<Dashboard> {
                     }), 
                   child: Text('Pie Chart'),
                   style: ElevatedButton.styleFrom(
-                    primary: showLineGraph? Colors.blue : Colors.purple,
+                    primary: showPieChart?  Colors.purple : Colors.grey,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     textStyle: TextStyle(
                       fontSize: 12,
@@ -128,7 +128,16 @@ class _DashboardState extends State<Dashboard> {
                     showPieChart = false,
                     showLineGraph = false
                     }), 
-                  child: Text('Bubble Chart')),
+                  child: Text('Bubble Chart'),
+                   style: ElevatedButton.styleFrom(
+                    primary: showBubbleChart? Colors.purple : Colors.grey,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+                    textStyle: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold
+                      )
+                    ),
+                  )
                 ],
               ),
               if(showLineGraph)
@@ -183,7 +192,7 @@ class _DashboardState extends State<Dashboard> {
             DrawerHeader(
               child: Text('What data do you want to visualize?'),
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.indigo.shade200,
               ),
             ),
             ListTile(
