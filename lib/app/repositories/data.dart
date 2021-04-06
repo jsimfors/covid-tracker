@@ -16,7 +16,7 @@ class CasesSuspRecov {
 
 class CasesCathegorized {
     CasesCathegorized(this.x, this.y, this.size, this.pointColor);
-        final double x;
+        final String x;
         final double y;
         final double size;
         final Color pointColor;
@@ -44,13 +44,13 @@ List<PreviousCovid> previousCovidData(valueToday) {
 //   return pieChartData;
 // }
 
-List<CasesCathegorized> bubbleChartData(value) {
-  final bubbleChartData = [
-            CasesCathegorized(2010, 65, 1.32, const Color.fromRGBO(255, 0, 255, 0.5)),
-            CasesCathegorized(2011, 38, 4.21, const Color.fromRGBO(0, 0, 255, 0.7)),
-            CasesCathegorized(2012, 34, 0.38, const Color.fromRGBO(0, 255, 255, 0.7)),
-            CasesCathegorized(2013, 52, 9.29, const Color.fromRGBO(255, 255, 25, 0.7)),
-            CasesCathegorized(2014, 40, 7.34, const Color.fromRGBO(255, 0, 255, 0.7))
-        ];
-    return bubbleChartData;
-}
+// List<CasesCathegorized> bubbleChartData(value) {
+//   final bubbleChartData = [
+//             CasesCathegorized(2010, 65, 1.32, const Color.fromRGBO(255, 0, 255, 0.5)),
+//             CasesCathegorized(2011, 38, 4.21, const Color.fromRGBO(0, 0, 255, 0.7)),
+//             CasesCathegorized(2012, 34, 0.38, const Color.fromRGBO(0, 255, 255, 0.7)),
+//             CasesCathegorized(2013, 52, 9.29, const Color.fromRGBO(255, 255, 25, 0.7)),
+//             CasesCathegorized(2014, 40, 7.34, const Color.fromRGBO(255, 0, 255, 0.7))
+//         ];
+//     return bubbleChartData;
+// }

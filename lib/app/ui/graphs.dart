@@ -4,6 +4,7 @@ import 'package:corona_stats_app/app/services/api.dart';
 import 'package:corona_stats_app/app/services/endpoint_data.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:corona_stats_app/app/ui/dashboard.dart';
 
 class LineGraph extends StatelessWidget {
     const LineGraph({Key key, this.value}) : super(key: key);
@@ -59,21 +60,34 @@ class PieChart extends StatelessWidget {
 
 
 class BubbleChart extends StatelessWidget {
-    const BubbleChart ({Key key, this.value}) : super(key: key);
-    final int value;
+    const BubbleChart({Key key, this.valueList, this.endpoints}) : super(key: key);
+
+    final List<Endpoint> valueList;
+    final Map<Endpoint, EndpointData> endpoints;
+
 
   Widget build(BuildContext context) { 
         return  SfCartesianChart(
-                        series: <ChartSeries>[
+                      primaryXAxis: CategoryAxis(),
+
+                        series:  <ChartSeries<CasesCathegorized, String>>[
                             // Renders bubble chart
-                            BubbleSeries<CasesCathegorized, double>(
-                                dataSource: bubbleChartData(value),
+                            BubbleSeries<CasesCathegorized, String>(
+                                dataSource: [
+                                  CasesCathegorized('Cases', endpoints[valueList[0]].value.toDouble(), endpoints[valueList[0]].value.toDouble(), const Color.fromRGBO(255, 0, 255, 0.5)),
+                                  CasesCathegorized('Suspected Cases',  endpoints[valueList[1]].value.toDouble(), endpoints[valueList[1]].value.toDouble(), const Color.fromRGBO(0, 0, 255, 0.7)),
+                                  CasesCathegorized('Confirmed Cases', endpoints[valueList[2]].value.toDouble(), endpoints[valueList[2]].value.toDouble(), const Color.fromRGBO(0, 255, 255, 0.7)),
+                                  CasesCathegorized('Deaths',  endpoints[valueList[3]].value.toDouble(), endpoints[valueList[3]].value.toDouble(), const Color.fromRGBO(255, 255, 25, 0.7)),
+                                  CasesCathegorized('Recovered',  endpoints[valueList[4]].value.toDouble(), endpoints[valueList[4]].value.toDouble(), const Color.fromRGBO(255, 0, 255, 0.7))
+                                ],
                                 sizeValueMapper: (CasesCathegorized sales, _) => sales.size,
                                 pointColorMapper:(CasesCathegorized sales, _) => sales.pointColor,
                                 minimumRadius:9, // Minimum radius of bubble
                                 maximumRadius: 30, // Maximum radius of bubble
                                 xValueMapper: (CasesCathegorized sales, _) => sales.x,
-                                yValueMapper: (CasesCathegorized sales, _) => sales.y
+                                yValueMapper: (CasesCathegorized sales, _) => sales.y,
+                                dataLabelMapper:(CasesCathegorized data, _) => data.x,
+                                 dataLabelSettings: DataLabelSettings( isVisible: true )
                             )
                         ]
                     );

@@ -62,6 +62,8 @@ class _DashboardState extends State<Dashboard> {
                   : null,
       );
     final header = 'Corona Stats';
+        print(_endpointsData.values[Endpoint.values[0]].value);
+
 
       return  Scaffold(
         appBar: AppBar(title: Text('Data Visualization'),),
@@ -153,9 +155,8 @@ class _DashboardState extends State<Dashboard> {
                 valueR:  _endpointsData != null ?  _endpointsData.values[Endpoint.values[4]]?.value : null,
                 )else if(showBubbleChart)
                  BubbleChart(
-                  value: _endpointsData != null
-                      ? _endpointsData.values[Endpoint.values[0]]?.value
-                      : null,
+                  valueList: Endpoint != null ? Endpoint.values : null,
+                  endpoints: _endpointsData != null ? _endpointsData.values : null,
                 )else
                 Text('Choose a visualizationtype above'),
                Padding(
