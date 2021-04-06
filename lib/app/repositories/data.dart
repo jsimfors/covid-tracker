@@ -7,15 +7,15 @@ class PreviousCovid {
   PreviousCovid (this.monthYear, this.casesMY);
 }
 
-class ChartData {
-    ChartData(this.x, this.y, [this.color]);
+class CasesSuspRecov {
+    CasesSuspRecov(this.x, this.y, [this.color]);
     final String x;
     final double y;
     final Color color;
 }
 
-class BubbleChartData {
-    BubbleChartData(this.x, this.y, this.size, this.pointColor);
+class CasesCathegorized {
+    CasesCathegorized(this.x, this.y, this.size, this.pointColor);
         final double x;
         final double y;
         final double size;
@@ -34,23 +34,23 @@ List<PreviousCovid> previousCovidData(valueToday) {
   return previousCovidData;
 }
 
-List<ChartData> pieChartData(value) {
-  final pieChartData  = [
-            ChartData('David', value.toDouble()*0.8),
-            ChartData('Steve', value.toDouble()*1.8),
-            ChartData('Jack', value.toDouble()),
-            ChartData('Others', value.toDouble()*1.2)
-        ];
-  return pieChartData;
-}
+// List<CasesSuspRecov> pieChartData(valueList) {
+//   final pieChartData  = [
+//             CasesSuspRecov('David', value.toDouble()*0.8),
+//             CasesSuspRecov('Steve', value.toDouble()*1.8),
+//             CasesSuspRecov('Jack', value.toDouble()),
+//             CasesSuspRecov('Others', value.toDouble()*1.2)
+//         ];
+//   return pieChartData;
+// }
 
-List<BubbleChartData> bubbleChartData(value) {
+List<CasesCathegorized> bubbleChartData(value) {
   final bubbleChartData = [
-            BubbleChartData(2010, 65, 1.32, const Color.fromRGBO(255, 0, 255, 0.5)),
-            BubbleChartData(2011, 38, 4.21, const Color.fromRGBO(0, 0, 255, 0.7)),
-            BubbleChartData(2012, 34, 0.38, const Color.fromRGBO(0, 255, 255, 0.7)),
-            BubbleChartData(2013, 52, 9.29, const Color.fromRGBO(255, 255, 25, 0.7)),
-            BubbleChartData(2014, 40, 7.34, const Color.fromRGBO(255, 0, 255, 0.7))
+            CasesCathegorized(2010, 65, 1.32, const Color.fromRGBO(255, 0, 255, 0.5)),
+            CasesCathegorized(2011, 38, 4.21, const Color.fromRGBO(0, 0, 255, 0.7)),
+            CasesCathegorized(2012, 34, 0.38, const Color.fromRGBO(0, 255, 255, 0.7)),
+            CasesCathegorized(2013, 52, 9.29, const Color.fromRGBO(255, 255, 25, 0.7)),
+            CasesCathegorized(2014, 40, 7.34, const Color.fromRGBO(255, 0, 255, 0.7))
         ];
     return bubbleChartData;
 }

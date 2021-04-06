@@ -148,9 +148,9 @@ class _DashboardState extends State<Dashboard> {
                 )
               else if(showPieChart)
                 PieChart(
-                value: _endpointsData != null
-                      ? _endpointsData.values[Endpoint.values[0]]?.value
-                      : null,
+                // valueList: _endpointsData != null ? _endpointsData.values[Endpoint.values] : null,
+                valueD: _endpointsData != null ?  _endpointsData.values[Endpoint.values[3]]?.value : null,
+                valueR:  _endpointsData != null ?  _endpointsData.values[Endpoint.values[4]]?.value : null,
                 )else if(showBubbleChart)
                  BubbleChart(
                   value: _endpointsData != null
