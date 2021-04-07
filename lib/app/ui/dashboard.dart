@@ -75,11 +75,13 @@ class _DashboardState extends State<Dashboard> {
                 child: Text(
                 header,
                 textAlign: TextAlign.center,
-                style: Theme.of(context)
+                style: 
+                Theme.of(context)
                   .textTheme
                   .headline3
-                  .copyWith(color: Colors.white, fontWeight: FontWeight.w800),
+                  .copyWith(color: Colors.purple, fontWeight: FontWeight.w900, fontStyle: FontStyle.italic),
                 ),
+
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
@@ -87,7 +89,7 @@ class _DashboardState extends State<Dashboard> {
                   'Visualization type:',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 0.8),
+                    color: Color.fromRGBO(255, 255, 255, 0.25),
                     fontSize: 16,
                   )
                 ),
@@ -162,8 +164,10 @@ class _DashboardState extends State<Dashboard> {
                   'The data used:',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 0.8),
-                    fontSize: 18,
+                    color: Color.fromRGBO(200, 150, 255, 0.8),
+                    fontSize: 24,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.bold
                     
                   )
               ),

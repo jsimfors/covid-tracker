@@ -69,7 +69,7 @@ class BubbleChart extends StatelessWidget {
   Widget build(BuildContext context) { 
         return  SfCartesianChart(
                       primaryXAxis: CategoryAxis(),
-
+                      title: ChartTitle(text: 'Size comparison'), //Chart title.
                         series:  <ChartSeries<CasesCathegorized, String>>[
                             // Renders bubble chart
                             BubbleSeries<CasesCathegorized, String>(
