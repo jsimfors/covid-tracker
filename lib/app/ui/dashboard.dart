@@ -142,13 +142,7 @@ class _DashboardState extends State<Dashboard> {
                   )
                 ],
               ),
-              if(showLineGraph)
-                LineGraph(
-                  value: _endpointsData != null
-                      ? _endpointsData.values[Endpoint.values[0]]?.value
-                      : null,
-                )
-              else if(showPieChart)
+              if(showPieChart)
                 PieChart(
                 // valueList: _endpointsData != null ? _endpointsData.values[Endpoint.values] : null,
                 valueD: _endpointsData != null ?  _endpointsData.values[Endpoint.values[3]]?.value : null,
@@ -157,8 +151,11 @@ class _DashboardState extends State<Dashboard> {
                  BubbleChart(
                   valueList: Endpoint != null ? Endpoint.values : null,
                   endpoints: _endpointsData != null ? _endpointsData.values : null,
-                )else
-                Text('Choose a visualizationtype above'),
+                )else // if showLineGraph OR all false.
+                LineGraph(
+                  value: _endpointsData != null
+                      ? _endpointsData.values[Endpoint.values[0]]?.value
+                      : null),
                Padding(
                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                  child: Text(
