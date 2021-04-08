@@ -1,5 +1,6 @@
 
 import 'dart:io';
+
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart' as xml;
 
@@ -10,16 +11,17 @@ class ClimateApi {
 
   ClimateApi({this.apiUrl = climateApiUrl});
 
-  Future<double> getAverageAnnualRainfall({
+  Future<double> getAverageAnnual({
     int fromYear,
     int toYear,
+    String rainOrTemp,
     List<String> countryISOs,
   }) async {
     double sum = 0;
 
     for (String countryISO in countryISOs) {
       String url =
-          '$apiUrl/climateweb/rest/v1/country/annualavg/pr/$fromYear/$toYear/$countryISO.xml';
+          '$apiUrl/climateweb/rest/v1/country/annualavg/$rainOrTemp/$fromYear/$toYear/$countryISO.xml';
 
       try {
         var response = await http.get(url);

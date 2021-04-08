@@ -42,8 +42,7 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Color(0xFF101010),
             cardColor: Color(0xFF222222),
           ),
-          home: AverageRainfallPage(),
-          //home: Dashboard(),
+          home: Dashboard(),
       ),
     );
   }

@@ -2,19 +2,20 @@
 import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
 import 'package:flutter/material.dart';
 
-class AverageRainfallPage extends StatefulWidget {
+class ClimatePage extends StatefulWidget {
   final String url;
 
-  const AverageRainfallPage({Key key, this.url}) : super(key: key);
+  const ClimatePage({Key key, this.url}) : super(key: key);
 
   @override
-  _AverageRainfallPageState createState() => _AverageRainfallPageState();
+  _ClimatePageState createState() => _ClimatePageState();
 }
 
-class _AverageRainfallPageState extends State<AverageRainfallPage> {
+class _ClimatePageState extends State<ClimatePage> {
   final TextEditingController _fromYearController = TextEditingController();
   final TextEditingController _toYearController = TextEditingController();
   final TextEditingController _countryISOsController = TextEditingController();
+  final TextEditingController _rainOrTemp = TextEditingController();
   ClimateApi _climateApi;
   double _average;
 
@@ -52,15 +53,21 @@ class _AverageRainfallPageState extends State<AverageRainfallPage> {
               keyboardType: TextInputType.number,
             ),
             TextField(
+              key: ValueKey('rainOrTemp'),
+              controller: _rainOrTemp,
+              decoration: InputDecoration(hintText: 'pr or tas'),
+              keyboardType: TextInputType.number,
+            ),
+            TextField(
               key: ValueKey('countryISOs'),
               controller: _countryISOsController,
               decoration:
                   InputDecoration(hintText: 'Country ISOs (space separated)'),
             ),
-            RaisedButton(
-              key: ValueKey('getAverageRainfall'),
+            ElevatedButton(
+              key: ValueKey('getAverage'),
               child: Text('Get Average Annual Rainfall'),
-              onPressed: getAverageRainfall,
+              onPressed: getAverage,
             ),
             Text(
               '${_average ?? ''}',
@@ -73,10 +80,11 @@ class _AverageRainfallPageState extends State<AverageRainfallPage> {
     );
   }
 
-  Future<void> getAverageRainfall() async {
-    var value = await _climateApi.getAverageAnnualRainfall(
+ Future<void> getAverage() async {
+    var value = await _climateApi.getAverageAnnual(
       fromYear: int.parse(_fromYearController.text),
       toYear: int.parse(_toYearController.text),
+      rainOrTemp: _rainOrTemp.text,
       countryISOs: _countryISOsController.text.split(' '),
     );
     setState(() {
