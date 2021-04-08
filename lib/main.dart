@@ -1,6 +1,7 @@
 import 'package:corona_stats_app/app/repositories/data_repositories.dart';
 import 'package:corona_stats_app/app/services/api.dart';
 import 'package:corona_stats_app/app/services/api_service.dart';
+import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
 import 'package:corona_stats_app/app/services/data_cache_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -11,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app/ui/dashboard.dart';
 
 void main() async {
+  APIServiceClimate.getData();
   WidgetsFlutterBinding.ensureInitialized();
   Intl.defaultLocale = 'en_GB';
   await initializeDateFormatting();
