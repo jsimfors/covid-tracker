@@ -29,6 +29,7 @@ dependencies:
   provider: ^5.0.0
   shared_preferences: ^2.0.5
   syncfusion_flutter_charts: ^19.1.54+1
+  xml: ^5.1.0
 
 dev_dependencies:
   flutter_test:

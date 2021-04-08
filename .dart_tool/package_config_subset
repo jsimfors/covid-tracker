@@ -90,6 +90,10 @@ pedantic
 2.12
 file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.0/
 file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/pedantic-1.11.0/lib/
+petitparser
+2.12
+file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-4.1.0/
+file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/petitparser-4.1.0/lib/
 platform
 2.12
 file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/platform-3.0.0/
@@ -178,6 +182,10 @@ xdg_directories
 2.12
 file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0/
 file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0/lib/
+xml
+2.12
+file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/xml-5.1.0/
+file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/xml-5.1.0/lib/
 sky_engine
 2.12
 file:///Users/johanna/Development/flutter/bin/cache/pkg/sky_engine/
