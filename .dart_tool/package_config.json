@@ -255,7 +255,13 @@
     },
     {
       "name": "syncfusion_flutter_core",
-      "rootUri": "file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_core-19.1.54+1",
+      "rootUri": "file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_core-19.1.55",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "syncfusion_flutter_maps",
+      "rootUri": "file:///Users/johanna/Development/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_maps-19.1.55-beta",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -308,7 +314,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-04-08T11:45:28.995776Z",
+  "generated": "2021-04-09T15:43:12.841823Z",
   "generator": "pub",
   "generatorVersion": "2.12.2"
 }

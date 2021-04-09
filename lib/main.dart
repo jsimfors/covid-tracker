@@ -1,8 +1,6 @@
 import 'package:corona_stats_app/app/repositories/data_repositories.dart';
 import 'package:corona_stats_app/app/services/api.dart';
 import 'package:corona_stats_app/app/services/api_service.dart';
-import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
-import 'package:corona_stats_app/app/services/climateAPI/data_repositories.dart';
 import 'package:corona_stats_app/app/services/data_cache_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -10,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'app/ui/dashboard.dart';
+import 'app/components/maps.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,7 +40,8 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Color(0xFF101010),
             cardColor: Color(0xFF222222),
           ),
-          home: Dashboard(),
+          // go back to: home: Dashboard(),
+          home: MapsPage(),
       ),
     );
   }
