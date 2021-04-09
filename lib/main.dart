@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/components/maps.dart';
+import 'app/ui/dashboard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -40,8 +41,9 @@ class MyApp extends StatelessWidget {
             scaffoldBackgroundColor: Color(0xFF101010),
             cardColor: Color(0xFF222222),
           ),
-          // go back to: home: Dashboard(),
-          home: MapsPage(),
+          // go back to: 
+          home: Dashboard(),
+          
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:corona_stats_app/app/components/maps.dart';
+import 'package:corona_stats_app/app/components/world_map.dart';
 import 'package:corona_stats_app/app/repositories/data_repositories.dart';
 import 'package:corona_stats_app/app/repositories/endpoints_data.dart';
 import 'package:corona_stats_app/app/services/api.dart';
@@ -71,7 +73,9 @@ class _DashboardState extends State<Dashboard> {
         appBar: AppBar(title: Text('Data Viiiiisualization'),),
           body: Center(    
           child: //CovidPage()
-          ClimatePage()
+                //ClimatePage()
+                //MapsPage()
+                WorldMapPage()
           ),
 
         drawer: Drawer(

@@ -31,14 +31,17 @@ class _ClimatePageState extends State<ClimatePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
         title: Text('Flutter Servertium Demo'),
       ),
       body: Container(
+        
         alignment: Alignment.center,
         margin: const EdgeInsets.all(32.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: ListView(
+          //mainAxisAlignment: MainAxisAlignment.center,
+          shrinkWrap: true,
           children: <Widget>[
             TextField(
               key: ValueKey('fromYear'),
