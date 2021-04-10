@@ -25,27 +25,28 @@ Widget build(BuildContext context) {
         children: <Widget>[
           _createHeader(),
           _createDrawerItem(
-            icon: Icons.contacts,
-            text: 'Covid',
+            icon: Icons.cloud,
+            text: 'Climate',
             onTap: () =>
             Navigator.pushReplacementNamed(context, Routes.climate)),
           _createDrawerItem(
-            icon: Icons.event, 
-            text: 'Climate',
+            icon: Icons.masks, 
+            text: 'Covid-19',
             onTap: () =>
             Navigator.pushReplacementNamed(context, Routes.covid)),
-          /*
-          _createDrawerItem(icon: Icons.note, text: 'Notes',),
-          Divider(),
-          _createDrawerItem(icon: Icons.collections_bookmark, text:           'Steps'),
-          _createDrawerItem(icon: Icons.face, text: 'Authors'),
-          _createDrawerItem(icon: Icons.account_box, text: 'Flutter Documentation'),
-          _createDrawerItem(icon: Icons.stars, text: 'Useful Links'),
-          Divider(),
-          _createDrawerItem(icon: Icons.bug_report, text: 'Report an issue'),
-          */
+           _createDrawerItem(
+            icon: Icons.local_pizza, 
+            text: 'Something else',
+            onTap: () =>
+            Navigator.pushReplacementNamed(context, Routes.covid)),
+            _createDrawerItem(
+            icon: Icons.theater_comedy, 
+            text: 'Something else again',
+            onTap: () =>
+            Navigator.pushReplacementNamed(context, Routes.covid)),
+             Divider(),
           ListTile(
-            title: Text('0.0.1'),
+            title: Text('Data vizualisation'),
             onTap: () {},
           ),
         ],
@@ -58,18 +59,18 @@ Widget build(BuildContext context) {
   return DrawerHeader(
       margin: EdgeInsets.zero,
       padding: EdgeInsets.zero,
-      /*decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fill,
-              image:  AssetImage('path/to/header_background.png'))),*/
+      decoration: BoxDecoration(
+          image: DecorationImage( 
+              fit: BoxFit.fill, // TODO: path
+              image:  AssetImage('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/drawer_header_background.png'))),
       child: Stack(children: <Widget>[
         Positioned(
-            bottom: 12.0,
+            bottom: 16.0,
             left: 16.0,
-            child: Text("Flutter Step-by-Step",
+            child: Text("Choose Cathegory",
                 style: TextStyle(
                     color: Colors.white,
-                    fontSize: 20.0,
+                    fontSize: 26.0,
                     fontWeight: FontWeight.w500))),
       ]));
 }
