@@ -14,10 +14,18 @@ class _DashboardState extends State<Dashboard> {
 
     // WIDGET 1 - Climate page
     Widget climateSection = ClimatePage();
-  
-
-    // WIDGET 2
+    // WIDGET 2 - Map page
     Widget mapSection = MapsPage();
+    // WIDGET 3 - Covid Statistics Page¨
+    Widget covidSection = CovidPage();
+    
+    /*Container(
+      padding: const EdgeInsets.all(32),
+      child: Text(
+        'Covid section',
+        softWrap: true,
+      ),
+    );*/
 
     return Scaffold(
         appBar: AppBar(
@@ -39,7 +47,8 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             climateSection,
-            mapSection
+            mapSection,
+            covidSection,
           ],
         ),
     );

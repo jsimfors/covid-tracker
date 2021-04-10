@@ -35,6 +35,7 @@ class _ClimatePageState extends State<ClimatePage> {
         alignment: Alignment.center,
         margin: const EdgeInsets.all(32.0),
         child: ListView(
+          scrollDirection: Axis.vertical,
           //mainAxisAlignment: MainAxisAlignment.center,
           shrinkWrap: true,
           children: <Widget>[

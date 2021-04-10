@@ -64,7 +64,10 @@ class _CovidPageState extends State<CovidPage> {
   @override
   Widget build(BuildContext context) {
     return 
-    ListView(
+    Container(
+      child: ListView(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
@@ -176,7 +179,7 @@ class _CovidPageState extends State<CovidPage> {
                     : null,
               )
             ],
-          );
+    ));
   }
 }
 
