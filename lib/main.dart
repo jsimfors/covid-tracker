@@ -2,6 +2,7 @@ import 'package:corona_stats_app/app/repositories/data_repositories.dart';
 import 'package:corona_stats_app/app/services/api.dart';
 import 'package:corona_stats_app/app/services/api_service.dart';
 import 'package:corona_stats_app/app/services/data_cache_service.dart';
+import 'package:corona_stats_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/components/maps.dart';
+import 'app/services/climateAPI/data_repositories.dart';
 import 'app/ui/dashboard.dart';
 import 'app/ui/dashborad_nCov.dart';
 
@@ -44,7 +46,10 @@ class MyApp extends StatelessWidget {
           ),
           // go back to: 
           home: Dashboard(),
-          
+          routes: {
+            Routes.climate: (context) => Dashboard(),
+            Routes.covid: (context) => CovidPage(),
+          }
       ),
     );
   }

@@ -5,6 +5,9 @@ import 'package:corona_stats_app/app/ui/dashborad_nCov.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
+  // Dashboard: current homepage: map & climate page. 
+  // TODO: add proper landing screen.
+  
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -15,10 +18,8 @@ class _DashboardState extends State<Dashboard> {
 
     Widget climateSection = ClimatePage();
     Widget mapSection = MapsPage();
-    Widget covidSection = CovidPage();
     Widget drawerMenu = DrawerSection();
-  
-    
+
 
     return Scaffold(
         appBar: AppBar(
@@ -40,8 +41,7 @@ class _DashboardState extends State<Dashboard> {
               ),
             ),
             climateSection,
-            mapSection,
-            covidSection,
+            mapSection
           ],
         ),
         drawer: drawerMenu         

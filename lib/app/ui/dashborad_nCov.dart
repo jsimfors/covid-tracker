@@ -1,3 +1,4 @@
+import 'package:corona_stats_app/app/components/drawer.dart';
 import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -64,11 +65,18 @@ class _CovidPageState extends State<CovidPage> {
         );
     }
   }
+
+  Widget drawerMenu = DrawerSection();
+
   @override
   Widget build(BuildContext context) {
+    
     return 
-    Container(
-      child: ListView(
+    Scaffold(
+       appBar: AppBar(
+          title: Text('Data Vizualisation')
+       ),
+      body: ListView(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
             children: [
@@ -182,6 +190,9 @@ class _CovidPageState extends State<CovidPage> {
                     : null,
               )
             ],
-    ));
+    ),        
+    drawer: drawerMenu         
+    );
+    
   }
 }

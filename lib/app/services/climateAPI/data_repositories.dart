@@ -1,4 +1,5 @@
 
+import 'package:corona_stats_app/app/components/maps.dart';
 import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class _ClimatePageState extends State<ClimatePage> {
     else
       _climateApi = ClimateApi();
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return 
@@ -75,6 +76,7 @@ class _ClimatePageState extends State<ClimatePage> {
               key: ValueKey('average'),
               style: Theme.of(context).textTheme.display1,
             ),
+          
           ],
         ),
       );
