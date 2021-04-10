@@ -1,7 +1,11 @@
 import 'dart:io';
+import 'package:corona_stats_app/app/components/maps.dart';
+import 'package:corona_stats_app/app/components/world_map.dart';
 import 'package:corona_stats_app/app/repositories/data_repositories.dart';
 import 'package:corona_stats_app/app/repositories/endpoints_data.dart';
 import 'package:corona_stats_app/app/services/api.dart';
+import 'package:corona_stats_app/app/services/climateAPI/data_repositories.dart';
+import 'package:corona_stats_app/app/ui/dashborad_nCov.dart';
 import 'package:corona_stats_app/app/ui/graphs.dart';
 import 'package:corona_stats_app/app/ui/show_alert_dialog.dart';
 import 'package:corona_stats_app/app/ui/updated_text.dart';
@@ -18,6 +22,11 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard> {
   EndpointsData _endpointsData;
+  bool showLineGraph = true;
+  bool showPieChart = false;
+  bool showBubbleChart = false;
+  // 0 line, 1 pie, 2 bubble.
+  List<bool> showGraphIndex = [true, false, false]; 
 
   @override
   void initState() {
@@ -56,48 +65,56 @@ class _DashboardState extends State<Dashboard> {
                   ? _endpointsData.values[Endpoint.cases]?.date
                   : null,
       );
-          return Scaffold(
-      appBar: AppBar(
-        title: Text('Coronavirus Tracker'),
-      ),
-      body: RefreshIndicator(
-        onRefresh: _updateData,
-        child: ListView(
-          children: <Widget>[
-            // Row 1 - Status text:
-            LastUpdatedStatusText(
-              text: formatter.lastUpdatedStatusText(),
-            ),
-            // Row 2 0 The chart
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    final header = 'Corona Stats';
+    //print(_endpointsData.values[Endpoint.values[0]].value);
 
-              children: [ 
-              Text('Corona Stats',
-              textAlign: TextAlign.center, 
-              style: Theme.of(context).textTheme.headline4),
-            ]),
-             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
- 
-              children: [ 
-              LineGraph(
-              value: _endpointsData != null
-                    ? _endpointsData.values[Endpoint.values[0]]?.value
-                    : null,
-              )],),
-            // Row 3 - the cards.
-            for (var endpoint in Endpoint.values)
-              EndpointCard(
-                endpoint: endpoint,
-                value: _endpointsData != null
-                    ? _endpointsData.values[endpoint]?.value
-                    : null,
+
+      return  Scaffold(
+        appBar: AppBar(title: Text('Data Viiiiisualization'),),
+          body: Center(    
+          child: CovidPage()
+                //ClimatePage()
+                //MapsPage()
+                //WorldMapPage()
+          ),
+
+        drawer: Drawer(
+        // Add a ListView to the drawer. This ensures the user can scroll
+        // through the options in the drawer if there isn't enough vertical
+        // space to fit everything.
+        child: ListView(
+          // Important: Remove any padding from the ListView.
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: Text('What data do you want to visualize?'),
+              decoration: BoxDecoration(
+                color: Colors.indigo.shade200,
               ),
+            ),
+            ListTile(
+              title: Text('Covid-19 Statistic'),
+              onTap: () {
+                // Update the state of the app
+                // ...
+                // To close the drawer
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              title: Text('Option 2'),
+              onTap: () {
+                
+                // Update the state of the app
+                // ...
+                // Then close the drawer
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),
-    );
+      );
   }
 }
 */

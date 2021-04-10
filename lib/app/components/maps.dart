@@ -46,8 +46,7 @@ void initState() {
 @override
 Widget build(BuildContext context) {
   final ThemeData themeData = Theme.of(context);
-  return 
-      SizedBox(
+  return SizedBox(
         height: MediaQuery.of(context).size.height * 0.55,
         child: SfMaps(
           layers: <MapShapeLayer>[
@@ -77,8 +76,7 @@ Widget build(BuildContext context) {
             ),
           ],
         ),
-  
-  );
+        );
 }
 }
 

@@ -30,13 +30,8 @@ class _ClimatePageState extends State<ClimatePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-      appBar: AppBar(
-        title: Text('Flutter Servertium Demo'),
-      ),
-      body: Container(
-        
+    return 
+      Container(  
         alignment: Alignment.center,
         margin: const EdgeInsets.all(32.0),
         child: ListView(
@@ -79,8 +74,7 @@ class _ClimatePageState extends State<ClimatePage> {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 
  Future<void> getAverage() async {
