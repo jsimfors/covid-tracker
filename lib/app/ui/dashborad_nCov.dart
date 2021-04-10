@@ -17,12 +17,15 @@ import 'endpoint_card.dart';
 
 
 class CovidPage extends StatefulWidget {
+    static const String routeName = '/covid';
+
     @override
   _CovidPageState createState() => _CovidPageState();
 
 }
 
 class _CovidPageState extends State<CovidPage> {
+
   EndpointsData _endpointsData;
   bool showLineGraph = true;
   bool showPieChart = false;
@@ -182,122 +185,3 @@ class _CovidPageState extends State<CovidPage> {
     ));
   }
 }
-
-/*
-        body: Center(    
-          child: ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
-                child: Text(
-                header,
-                textAlign: TextAlign.center,
-                style: 
-                Theme.of(context)
-                  .textTheme
-                  .headline3
-                  .copyWith(color: Colors.purple, fontWeight: FontWeight.w900, fontStyle: FontStyle.italic),
-                ),
-
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
-                child: Text(
-                  'Visualization type:',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 0.25),
-                    fontSize: 16,
-                  )
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [ // onPressed: () {},
-                  ElevatedButton(onPressed: () => setState(() => {
-                    showLineGraph = !showLineGraph,
-                    showPieChart = false,
-                    showBubbleChart = false
-                    }), 
-                  child: Text('Linear Graph'), 
-                  style: ElevatedButton.styleFrom(
-                    primary: showLineGraph? Colors.purple : Colors.grey,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                    textStyle: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold
-                    )
-                  ),
-                  ),
-                  ElevatedButton(onPressed: () => setState(() => {
-                    showPieChart = !showPieChart,
-                    showLineGraph = false,
-                    showBubbleChart = false
-                    }), 
-                  child: Text('Pie Chart'),
-                  style: ElevatedButton.styleFrom(
-                    primary: showPieChart?  Colors.purple : Colors.grey,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                    textStyle: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold
-                    )
-                    ),
-                  ),
-                  ElevatedButton(onPressed: () => setState(() => {
-                    showBubbleChart = !showBubbleChart,
-                    showPieChart = false,
-                    showLineGraph = false
-                    }), 
-                  child: Text('Bubble Chart'),
-                   style: ElevatedButton.styleFrom(
-                    primary: showBubbleChart? Colors.purple : Colors.grey,
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
-                    textStyle: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold
-                      )
-                    ),
-                  )
-                ],
-              ),
-              if(showPieChart)
-                PieChart(
-                // valueList: _endpointsData != null ? _endpointsData.values[Endpoint.values] : null,
-                valueD: _endpointsData != null ?  _endpointsData.values[Endpoint.values[3]]?.value : null,
-                valueR:  _endpointsData != null ?  _endpointsData.values[Endpoint.values[4]]?.value : null,
-                )else if(showBubbleChart)
-                 BubbleChart(
-                  valueList: Endpoint != null ? Endpoint.values : null,
-                  endpoints: _endpointsData != null ? _endpointsData.values : null,
-                )else // if showLineGraph OR all false.
-                LineGraph(
-                  value: _endpointsData != null
-                      ? _endpointsData.values[Endpoint.values[0]]?.value
-                      : null),
-               Padding(
-                 padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                 child: Text(
-                  'The data used:',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Color.fromRGBO(200, 150, 255, 0.8),
-                    fontSize: 24,
-                    fontStyle: FontStyle.italic,
-                    fontWeight: FontWeight.bold
-                    
-                  )
-              ),
-               ),
-              for (var endpoint in Endpoint.values)
-              EndpointCard(
-                endpoint: endpoint,
-                value: _endpointsData != null
-                    ? _endpointsData.values[endpoint]?.value
-                    : null,
-              )
-            ],
-          )
-          
-          ),
-*/

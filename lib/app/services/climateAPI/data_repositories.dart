@@ -3,6 +3,8 @@ import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
 import 'package:flutter/material.dart';
 
 class ClimatePage extends StatefulWidget {
+  static const String routeName = '/climate';
+
   final String url;
 
   const ClimatePage({Key key, this.url}) : super(key: key);
