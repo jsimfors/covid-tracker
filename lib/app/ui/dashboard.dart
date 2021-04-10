@@ -1,5 +1,6 @@
 import 'package:corona_stats_app/app/components/drawer.dart';
 import 'package:corona_stats_app/app/components/maps.dart';
+import 'package:corona_stats_app/app/components/world_map.dart';
 import 'package:corona_stats_app/app/services/climateAPI/data_repositories.dart';
 import 'package:corona_stats_app/app/ui/dashborad_nCov.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
 
     Widget climateSection = ClimatePage();
-    Widget mapSection = MapsPage();
+    //Widget mapSection = MapsPage();
+    Widget mapSection = WorldMapPage();
     Widget drawerMenu = DrawerSection();
 
 

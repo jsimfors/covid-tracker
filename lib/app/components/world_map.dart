@@ -26,28 +26,12 @@ class WorldMapPage extends StatefulWidget {
 }
 
 class _WorldMapPageState extends State<WorldMapPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: _ChoroplethMap());
-  }
-}
 
-class _ChoroplethMap extends StatefulWidget {
-  @override
-  __ChoroplethMapState createState() => __ChoroplethMapState();
-}
-
-class __ChoroplethMapState extends State<_ChoroplethMap> {
   List<_CountryDensityModel> _worldPopulationDensityDetails;
   MapShapeSource _mapShapeSource;
 
   @override
   void initState() {
-    super.initState();
 
     _worldPopulationDensityDetails = <_CountryDensityModel>[
       _CountryDensityModel('Monaco', 26337),
@@ -323,13 +307,15 @@ class __ChoroplethMapState extends State<_ChoroplethMap> {
             text: '>500'),
       ],
     );
+    super.initState();
+
   }
 
-  @override
-  void dispose() {
-    _worldPopulationDensityDetails?.clear();
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   _worldPopulationDensityDetails?.clear();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -338,7 +324,7 @@ class __ChoroplethMapState extends State<_ChoroplethMap> {
       children: [
         Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Text('World Population Density (per sq. km.)'),
+          child: Text('World Annual Rainfall per Country'),
         ),
         SfMaps(
           layers: [
