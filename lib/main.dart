@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/components/maps.dart';
 import 'app/ui/dashboard.dart';
+import 'app/ui/dashborad_nCov.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

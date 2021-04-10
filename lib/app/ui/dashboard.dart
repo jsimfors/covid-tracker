@@ -72,10 +72,10 @@ class _DashboardState extends State<Dashboard> {
       return  Scaffold(
         appBar: AppBar(title: Text('Data Viiiiisualization'),),
           body: Center(    
-          child: //CovidPage()
+          child: CovidPage()
                 //ClimatePage()
                 //MapsPage()
-                WorldMapPage()
+                //WorldMapPage()
           ),
 
         drawer: Drawer(
