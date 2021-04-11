@@ -24,9 +24,9 @@ class _DashboardState extends State<Dashboard> {
 
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Data Vizualisation'),
-          ),
+        appBar: AppBar( // TODO: Styling:
+            title: Image.asset('assets/logo.png'),
+            ),
         body: ListView(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,

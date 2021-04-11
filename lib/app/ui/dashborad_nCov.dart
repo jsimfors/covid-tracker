@@ -72,10 +72,20 @@ class _CovidPageState extends State<CovidPage> {
   Widget build(BuildContext context) {
     
     return 
-    Scaffold(
-       appBar: AppBar(
-          title: Text('Data Vizualisation')
-       ),
+   Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(100.0), // here the desired height
+          child: AppBar(
+              toolbarHeight: 100, 
+            title: Padding(
+              padding: const EdgeInsets.fromLTRB(50, 40, 50, 40),
+              child: FittedBox(
+                child: Image.asset('assets/logo.png'),
+                fit: BoxFit.fill,
+              )
+            ),            
+            ),
+        ),
       body: ListView(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
