@@ -80,7 +80,7 @@ class _CovidPageState extends State<CovidPage> {
             title: Padding(
               padding: const EdgeInsets.fromLTRB(50, 40, 50, 40),
               child: FittedBox(
-                child: Image.asset('assets/logo.png'),
+                child: Image.asset('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/images/header_logo.png'),
                 fit: BoxFit.fill,
               )
             ),            

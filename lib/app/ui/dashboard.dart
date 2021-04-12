@@ -25,7 +25,7 @@ class _DashboardState extends State<Dashboard> {
 
     return Scaffold(
         appBar: AppBar( // TODO: Styling:
-            title: Image.asset('assets/logo.png'),
+            title: Image.asset('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/images/header_logo.png'),
             ),
         body: ListView(
           scrollDirection: Axis.vertical,

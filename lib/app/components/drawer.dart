@@ -61,9 +61,9 @@ Widget build(BuildContext context) {
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
           image: DecorationImage( 
-              fit: BoxFit.fill, // TODO: path
-              image:  AssetImage('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/drawer_header_background.png'))),
-      child: Stack(children: <Widget>[
+              fit: BoxFit.fitHeight, // TODO: path
+              image:  AssetImage('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/images/drawer_header.png'))),
+      /*child: Stack(children: <Widget>[
         Positioned(
             bottom: 16.0,
             left: 16.0,
@@ -72,7 +72,8 @@ Widget build(BuildContext context) {
                     color: Colors.white,
                     fontSize: 26.0,
                     fontWeight: FontWeight.w500))),
-      ]));
+      ]));*/
+  );
 }
 
 
