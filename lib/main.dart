@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Statistics Visualizer',
           theme: ThemeData.dark().copyWith(
-            scaffoldBackgroundColor: Color(0xFF101010),
+            scaffoldBackgroundColor: Colors.transparent,
             cardColor: Color(0xFF222222),
           ),
           // go back to: 

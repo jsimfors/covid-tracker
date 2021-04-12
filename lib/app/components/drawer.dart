@@ -63,16 +63,17 @@ Widget build(BuildContext context) {
           image: DecorationImage( 
               fit: BoxFit.fitHeight, // TODO: path
               image:  AssetImage('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/images/drawer_header.png'))),
-      /*child: Stack(children: <Widget>[
+      child: Stack(children: <Widget>[
         Positioned(
             bottom: 16.0,
             left: 16.0,
             child: Text("Choose Cathegory",
                 style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 26.0,
-                    fontWeight: FontWeight.w500))),
-      ]));*/
+                    color: Colors.black87,
+                    fontSize: 14.0,
+                    fontWeight: FontWeight.w500))
+                    ),
+      ])
   );
 }
 

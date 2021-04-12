@@ -74,15 +74,14 @@ class _CovidPageState extends State<CovidPage> {
     return 
    Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(100.0), // here the desired height
+          preferredSize: Size.fromHeight(150.0),// here the desired height
           child: AppBar(
-              toolbarHeight: 100, 
-            title: Padding(
-              padding: const EdgeInsets.fromLTRB(50, 40, 50, 40),
-              child: FittedBox(
+              toolbarHeight: 150, 
+              backgroundColor: Colors.transparent,
+            title:
+              FittedBox(
                 child: Image.asset('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/images/header_logo.png'),
-                fit: BoxFit.fill,
-              )
+                fit: BoxFit.fitHeight,
             ),            
             ),
         ),

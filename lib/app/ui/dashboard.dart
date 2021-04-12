@@ -24,9 +24,18 @@ class _DashboardState extends State<Dashboard> {
 
 
     return Scaffold(
-        appBar: AppBar( // TODO: Styling:
-            title: Image.asset('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/images/header_logo.png'),
+          appBar: PreferredSize(
+          preferredSize: Size.fromHeight(150.0),// here the desired height
+          child: AppBar(
+              toolbarHeight: 150, 
+              backgroundColor: Colors.transparent,
+            title:
+              FittedBox(
+                child: Image.asset('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/images/header_logo.png'),
+                fit: BoxFit.fitHeight,
+            ),            
             ),
+        ),
         body: ListView(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
