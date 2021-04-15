@@ -11,6 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app/components/maps.dart';
 import 'app/services/climateAPI/data_repositories.dart';
+import 'app/ui/colors.dart';
 import 'app/ui/dashboard.dart';
 import 'app/ui/dashborad_nCov.dart';
 
@@ -20,12 +21,14 @@ void main() async {
   await initializeDateFormatting();
   // To get value asynchronously in void main() (Since getInstance() returns Final, and we're in build.)
   final sharedPreferences = await SharedPreferences.getInstance();
+  customColors();
   runApp(MyApp(sharedPreferences: sharedPreferences));
 } 
 
 class MyApp extends StatelessWidget {
   const MyApp({Key key, @required this.sharedPreferences}) : super(key: key);
   final SharedPreferences sharedPreferences;
+
 
   // This widget is the root of your application.
   @override

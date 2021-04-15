@@ -1,5 +1,7 @@
 import 'package:corona_stats_app/app/components/drawer.dart';
 import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
+import 'package:corona_stats_app/app/ui/colors.dart';
+import 'package:corona_stats_app/main.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:corona_stats_app/app/repositories/data_repositories.dart';
@@ -14,7 +16,6 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'endpoint_card.dart';
-
 
 
 class CovidPage extends StatefulWidget {
@@ -73,21 +74,28 @@ class _CovidPageState extends State<CovidPage> {
     
     return 
    Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(150.0),// here the desired height
-          child: AppBar(
-              toolbarHeight: 150, 
-              backgroundColor: Colors.transparent,
-            title: Text('Title text')
-              /*FittedBox(
-                child: Image.asset('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/images/header_logo.png'),
-                fit: BoxFit.fitHeight,
-            ),   */         
+  body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Stack( // to place appbar on top of logo
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                    child: Container(
+                      color: Colors.transparent,
+                      child: Image.asset('assets/images/header_logo.png') 
+                  ),
+                ),
+                AppBar(
+                  backgroundColor: Colors.transparent,   
+                  toolbarHeight: 100,
+                  elevation: 0,
+                ),
+            ],
             ),
-        ),
-      body: ListView(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
+            Container(
+              child: Column(
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
@@ -98,8 +106,8 @@ class _CovidPageState extends State<CovidPage> {
                 Theme.of(context)
                   .textTheme
                   .headline3
-                  .copyWith(color: Colors.purple, fontWeight: FontWeight.w900, fontStyle: FontStyle.italic),
-                ),
+                  .copyWith(color: customColors()['Dark Salmon'], fontWeight: FontWeight.w900, fontStyle: FontStyle.italic),
+                ),// myBgColors[4].color
 
               ),
               Padding(
@@ -200,8 +208,13 @@ class _CovidPageState extends State<CovidPage> {
               )
             ],
     ),        
-    drawer: drawerMenu         
-    );
+            
+        )
+        ]
+        )
+        ),
+        drawer: drawerMenu 
+        );
     
   }
 }
