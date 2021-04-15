@@ -42,8 +42,8 @@ class PieChart extends StatelessWidget {
                         // Render pie chart
                         PieSeries<CasesSuspRecov, String>(
                             dataSource: [
-                              CasesSuspRecov('Recovered', valueR.toDouble()),
-                              CasesSuspRecov('Deaths', valueD.toDouble()),
+                              CasesSuspRecov('Recovered', valueR.toDouble(), customColor['Blue']),
+                              CasesSuspRecov('Deaths', valueD.toDouble(),  customColor['Dark Salmon']),
                             ],
                             pointColorMapper:(CasesSuspRecov data,  _) => data.color,
                             xValueMapper: (CasesSuspRecov data, _) => data.x,
@@ -70,17 +70,31 @@ class BubbleChart extends StatelessWidget {
 
   Widget build(BuildContext context) { 
         return  SfCartesianChart(
-                      primaryXAxis: CategoryAxis(),
+          plotAreaBorderWidth: 0,
+            primaryXAxis: CategoryAxis(
+                        majorGridLines: MajorGridLines(width: 0),
+                        axisLine: AxisLine(width: 0),
+                        minimum: -2,
+                        maximum: 5,
+                        isVisible: false,
+                      ),
+                      primaryYAxis: NumericAxis(
+                        majorGridLines: MajorGridLines(width: 0),
+                        axisLine: AxisLine(width: 0),
+                        minimum: -40000000,
+                        maximum: 300000000,
+                        isVisible: false
+                      ),
                       title: ChartTitle(text: 'Size comparison'), //Chart title.
                         series:  <ChartSeries<CasesCathegorized, String>>[
                             // Renders bubble chart
                             BubbleSeries<CasesCathegorized, String>(
                                 dataSource: [
-                                  CasesCathegorized('Cases', endpoints[valueList[0]].value.toDouble(), endpoints[valueList[0]].value.toDouble(), const Color.fromRGBO(255, 0, 255, 0.5)),
-                                  CasesCathegorized('Suspected Cases',  endpoints[valueList[1]].value.toDouble(), endpoints[valueList[1]].value.toDouble(), const Color.fromRGBO(0, 0, 255, 0.7)),
-                                  CasesCathegorized('Confirmed Cases', endpoints[valueList[2]].value.toDouble(), endpoints[valueList[2]].value.toDouble(), const Color.fromRGBO(0, 255, 255, 0.7)),
-                                  CasesCathegorized('Deaths',  endpoints[valueList[3]].value.toDouble(), endpoints[valueList[3]].value.toDouble(), const Color.fromRGBO(255, 255, 25, 0.7)),
-                                  CasesCathegorized('Recovered',  endpoints[valueList[4]].value.toDouble(), endpoints[valueList[4]].value.toDouble(), const Color.fromRGBO(255, 0, 255, 0.7))
+                                  CasesCathegorized('Cases', endpoints[valueList[0]].value.toDouble(), endpoints[valueList[0]].value.toDouble(), customColor['Light Salmon']),
+                                  CasesCathegorized('Suspected Cases',  endpoints[valueList[1]].value.toDouble(), endpoints[valueList[1]].value.toDouble(),  customColor['Dark Blue']),
+                                  CasesCathegorized('Confirmed Cases', endpoints[valueList[2]].value.toDouble(), endpoints[valueList[2]].value.toDouble(),  customColor['Salmon']),
+                                  CasesCathegorized('Deaths',  endpoints[valueList[3]].value.toDouble(), endpoints[valueList[3]].value.toDouble(),  customColor['Dark Salmon']),
+                                  CasesCathegorized('Recovered',  endpoints[valueList[4]].value.toDouble(), endpoints[valueList[4]].value.toDouble(), customColor['Blue'])
                                 ],
                                 sizeValueMapper: (CasesCathegorized sales, _) => sales.size,
                                 pointColorMapper:(CasesCathegorized sales, _) => sales.pointColor,
@@ -89,7 +103,16 @@ class BubbleChart extends StatelessWidget {
                                 xValueMapper: (CasesCathegorized sales, _) => sales.x,
                                 yValueMapper: (CasesCathegorized sales, _) => sales.y,
                                 dataLabelMapper:(CasesCathegorized data, _) => data.x,
-                                 dataLabelSettings: DataLabelSettings( isVisible: true )
+                                dataLabelSettings: DataLabelSettings( isVisible: true, 
+                                  useSeriesColor: true,
+                                  offset: Offset(0, 20),
+                                  /*color: customColor['White'],*/
+                                  textStyle: TextStyle(fontWeight: FontWeight.w500),
+                                  labelAlignment: ChartDataLabelAlignment.top
+                                  //
+                                )
+
+                                  //color: customColor['Light Salmon']),
                             )
                         ]
                     );

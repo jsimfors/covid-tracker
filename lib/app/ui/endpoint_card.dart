@@ -22,11 +22,11 @@ class EndpointCard extends StatelessWidget {
   static Map<Endpoint, EndpointCardData> _cardsData = {
     
     // Change from type String to type EndpointCardData, to include also icon and color in object.
-    Endpoint.cases: EndpointCardData('Cases', 'assets/count.png', getCustomColors()['Dark Blue']),
-    Endpoint.casesConfirmed: EndpointCardData('Confirmed Cases', 'assets/fever.png',  getCustomColors()['Blue']),
-    Endpoint.casesSuspected:  EndpointCardData('Suspected Cases', 'assets/suspect.png',  getCustomColors()['Blue']),
+    Endpoint.cases: EndpointCardData('Cases', 'assets/count.png', getCustomColors()['Light Salmon']),
+    Endpoint.casesConfirmed: EndpointCardData('Confirmed Cases', 'assets/fever.png',  getCustomColors()['Salmon']),
+    Endpoint.casesSuspected:  EndpointCardData('Suspected Cases', 'assets/suspect.png',  getCustomColors()['Dark Blue']),
     Endpoint.deaths:  EndpointCardData('Deaths', 'assets/death.png',  getCustomColors()['Dark Salmon']),
-    Endpoint.recovered:  EndpointCardData('Recovered', 'assets/patient.png',  getCustomColors()['Salmon']),
+    Endpoint.recovered:  EndpointCardData('Recovered', 'assets/patient.png',  getCustomColors()['Blue']),
   };
 
   String get formattedValue{
