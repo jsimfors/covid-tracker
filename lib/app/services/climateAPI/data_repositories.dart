@@ -1,5 +1,6 @@
 
 import 'package:corona_stats_app/app/components/maps.dart';
+import 'package:corona_stats_app/app/components/world_map.dart';
 import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
 import 'package:flutter/material.dart';
 
@@ -37,10 +38,10 @@ class _ClimatePageState extends State<ClimatePage> {
       Container(  
         alignment: Alignment.center,
         margin: const EdgeInsets.all(32.0),
-        child: ListView(
-          scrollDirection: Axis.vertical,
+        child: Column(
+          //scrollDirection: Axis.vertical,
           //mainAxisAlignment: MainAxisAlignment.center,
-          shrinkWrap: true,
+          //shrinkWrap: true,
           children: <Widget>[
             TextField(
               key: ValueKey('fromYear'),
@@ -93,4 +94,7 @@ class _ClimatePageState extends State<ClimatePage> {
       _average = value;
     });
   }
+
 }
+
+

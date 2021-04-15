@@ -1,10 +1,12 @@
 import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
 import 'package:corona_stats_app/app/services/climateAPI/data_repositories.dart';
+import 'package:corona_stats_app/app/ui/colors.dart';
 import 'package:corona_stats_app/app/ui/dashboard.dart';
 import 'package:corona_stats_app/app/ui/dashborad_nCov.dart';
 import 'package:corona_stats_app/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
+Map customColor = getCustomColors();
 
 class DrawerSection extends StatefulWidget {
 
@@ -34,21 +36,6 @@ Widget build(BuildContext context) {
             text: 'Covid-19',
             onTap: () =>
             Navigator.pushReplacementNamed(context, Routes.covid)),
-           _createDrawerItem(
-            icon: Icons.local_pizza, 
-            text: 'Something else',
-            onTap: () =>
-            Navigator.pushReplacementNamed(context, Routes.covid)),
-            _createDrawerItem(
-            icon: Icons.theater_comedy, 
-            text: 'Something else again',
-            onTap: () =>
-            Navigator.pushReplacementNamed(context, Routes.covid)),
-             Divider(),
-          ListTile(
-            title: Text('Data vizualisation'),
-            onTap: () {},
-          ),
         ],
       ),
     );

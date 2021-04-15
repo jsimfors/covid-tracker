@@ -7,7 +7,7 @@ Map getCustomColors() {
    myColors['Light Salmon'] = Color(0xFFFFD9CD); 
    myColors['Blue'] = Color(0xFF66B9DF); 
    myColors['Dark Blue'] = Color(0xFF437EA5); 
-   myColors['Black'] = Color(0xFF1A1B1E); 
+   myColors['Black'] = Color(0xFF09090A); 
    myColors['White'] = Color(0xFFECE6E4); 
     return myColors; 
 } 

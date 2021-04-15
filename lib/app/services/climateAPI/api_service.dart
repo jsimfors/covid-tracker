@@ -22,7 +22,7 @@ class ClimateApi {
     for (String countryISO in countryISOs) {
       String url =
           '$apiUrl/climateweb/rest/v1/country/annualavg/$rainOrTemp/$fromYear/$toYear/$countryISO.xml';
-
+      print(url);
       try {
         var response = await http.get(url);
         if (response.body

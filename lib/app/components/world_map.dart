@@ -1,25 +1,13 @@
+import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
-/*
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Choropleth Map',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: WorldMapPage(title: 'Flutter Choropleth Map'),
-    );
-  }
-}*/
-
-
 class WorldMapPage extends StatefulWidget {
-  WorldMapPage({Key key, this.title}) : super(key: key);
+  WorldMapPage({Key key, this.title, this.url}) : super(key: key);
 
   final String title;
+  static const String routeName = '/climate';
+  final String url;
 
   @override
   _WorldMapPageState createState() => _WorldMapPageState();
@@ -28,12 +16,28 @@ class WorldMapPage extends StatefulWidget {
 class _WorldMapPageState extends State<WorldMapPage> {
 
   List<_CountryDensityModel> _worldPopulationDensityDetails;
+  List<_CountryDensityModel> _worldPopulationDensityDetails2;
+
   MapShapeSource _mapShapeSource;
+  ClimateApi _climateApi;
+  double _average;
 
   @override
   void initState() {
+     super.initState();
+      if (widget.url != null)
+        _climateApi = ClimateApi(apiUrl: widget.url);
+      else
+        _climateApi = ClimateApi();
 
-    _worldPopulationDensityDetails = <_CountryDensityModel>[
+  _worldPopulationDensityDetails = <_CountryDensityModel>[
+      _CountryDensityModel('Sweden', _average),
+      _CountryDensityModel('United States of America', _average)
+    ];
+
+
+
+    _worldPopulationDensityDetails2 = <_CountryDensityModel>[
       _CountryDensityModel('Monaco', 26337),
       _CountryDensityModel('Macao', 21717),
       _CountryDensityModel('Singapore', 8358),
@@ -338,6 +342,18 @@ class _WorldMapPageState extends State<WorldMapPage> {
         ),
       ],
     );
+  }
+  Future<double> getAverageForMap(String code) async {
+    var value = await _climateApi.getAverageAnnual(
+      fromYear: int.parse('1980'),
+      toYear: int.parse('1999'),
+      rainOrTemp: 'pr',
+      countryISOs: [code],
+    );
+    setState(() {
+      _average = value;
+    });
+    return value;
   }
 }
 

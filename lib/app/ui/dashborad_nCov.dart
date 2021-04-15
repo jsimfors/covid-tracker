@@ -69,7 +69,7 @@ class _CovidPageState extends State<CovidPage> {
 
   Widget drawerMenu = DrawerSection();
   Map customColor = getCustomColors();
-  String subheader = 'CHOOSE HOW TO VISUALIZE THE LATET COVID-19 DATA';
+  String subheader = 'CHOOSE HOW TO VISUALIZE THE LATEST COVID-19 DATA';
 
 
   @override
