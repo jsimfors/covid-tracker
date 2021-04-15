@@ -78,11 +78,11 @@ class _CovidPageState extends State<CovidPage> {
           child: AppBar(
               toolbarHeight: 150, 
               backgroundColor: Colors.transparent,
-            title:
-              FittedBox(
+            title: Text('Title text')
+              /*FittedBox(
                 child: Image.asset('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/images/header_logo.png'),
                 fit: BoxFit.fitHeight,
-            ),            
+            ),   */         
             ),
         ),
       body: ListView(

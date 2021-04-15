@@ -22,41 +22,51 @@ class _DashboardState extends State<Dashboard> {
     Widget mapSection = WorldMapPage();
     Widget drawerMenu = DrawerSection();
 
-
     return Scaffold(
-          appBar: PreferredSize(
-          preferredSize: Size.fromHeight(150.0),// here the desired height
-          child: AppBar(
-              toolbarHeight: 150, 
-              backgroundColor: Colors.transparent,
-            title:
-              FittedBox(
-                child: Image.asset('/Users/johanna/Development/dart-project/nCov/corona_stats_app/assets/images/header_logo.png'),
-                fit: BoxFit.fitHeight,
-            ),            
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Stack( // to place appbar on top of logo
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+                    child: Container(
+                      color: Colors.transparent,
+                      child: Image.asset('assets/images/header_logo.png') 
+                  ),
+                ),
+                AppBar(
+                  backgroundColor: Colors.transparent,   
+                  toolbarHeight: 100,
+                  elevation: 0,
+                ),
+            ],
             ),
-        ),
-        body: ListView(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
-              child: Text(
-                'Please choose what to vizualise:',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Color.fromRGBO(255, 255, 255, 1),
-                      fontSize: 21,
-                    )
-              ),
+            Container(
+              child: Column(children: [
+                climateSection,
+                mapSection
+              ],),
+
             ),
-            climateSection,
-            mapSection
-          ],
-        ),
-        drawer: drawerMenu         
+            Container(
+              
+            )
+            
+            
+            /* Initial container
+            Container(color: Colors.pink,
+              width: 300,
+              height: 300,
+              child: Center(
+                child: Text('Text 1'),
+              )
+            )*/
+          ]
+        )
+      ),
+      drawer: drawerMenu,
     );
   }
-
 }
