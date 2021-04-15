@@ -2,6 +2,8 @@ import 'package:corona_stats_app/app/services/api.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import 'colors.dart';
+
 class EndpointCardData {
   EndpointCardData(this.title, this.assetName, this.color);
   final String title;
@@ -15,13 +17,16 @@ class EndpointCard extends StatelessWidget {
   final Endpoint endpoint;
   final int value;
 
+
+
   static Map<Endpoint, EndpointCardData> _cardsData = {
+    
     // Change from type String to type EndpointCardData, to include also icon and color in object.
-    Endpoint.cases: EndpointCardData('Cases', 'assets/count.png', Color(0xFFFFF492)),
-    Endpoint.casesConfirmed: EndpointCardData('Confirmed Cases', 'assets/fever.png', Color(0xFFffc53d)),
-    Endpoint.casesSuspected:  EndpointCardData('Suspected Cases', 'assets/suspect.png', Color(0xFFf875ff)),
-    Endpoint.deaths:  EndpointCardData('Deaths', 'assets/death.png', Color(0xFF78ffe4)),
-    Endpoint.recovered:  EndpointCardData('Recovered', 'assets/patient.png', Color(0xFF75acff)),
+    Endpoint.cases: EndpointCardData('Cases', 'assets/count.png', getCustomColors()['Dark Blue']),
+    Endpoint.casesConfirmed: EndpointCardData('Confirmed Cases', 'assets/fever.png',  getCustomColors()['Blue']),
+    Endpoint.casesSuspected:  EndpointCardData('Suspected Cases', 'assets/suspect.png',  getCustomColors()['Blue']),
+    Endpoint.deaths:  EndpointCardData('Deaths', 'assets/death.png',  getCustomColors()['Dark Salmon']),
+    Endpoint.recovered:  EndpointCardData('Recovered', 'assets/patient.png',  getCustomColors()['Salmon']),
   };
 
   String get formattedValue{
@@ -31,9 +36,11 @@ class EndpointCard extends StatelessWidget {
     // Uses intl to add separator for large numbers
     return NumberFormat('#,###,###,###').format(value);
   }
+
   @override
   Widget build(BuildContext context) {
     final cardData = _cardsData[endpoint];
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
       child: Card(

@@ -21,7 +21,6 @@ void main() async {
   await initializeDateFormatting();
   // To get value asynchronously in void main() (Since getInstance() returns Final, and we're in build.)
   final sharedPreferences = await SharedPreferences.getInstance();
-  customColors();
   runApp(MyApp(sharedPreferences: sharedPreferences));
 } 
 

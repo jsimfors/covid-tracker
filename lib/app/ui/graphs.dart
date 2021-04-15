@@ -2,10 +2,11 @@ import 'package:corona_stats_app/app/repositories/data.dart';
 import 'package:corona_stats_app/app/repositories/endpoints_data.dart';
 import 'package:corona_stats_app/app/services/api.dart';
 import 'package:corona_stats_app/app/services/endpoint_data.dart';
+import 'package:corona_stats_app/app/ui/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:corona_stats_app/app/ui/dashboard.dart';
 
+ Map customColor = getCustomColors();
 class LineGraph extends StatelessWidget {
     const LineGraph({Key key, this.value}) : super(key: key);
     final int value;
@@ -21,7 +22,8 @@ class LineGraph extends StatelessWidget {
                 dataSource: previousCovidData(value),
                 xValueMapper: (PreviousCovid prevData, _) => prevData.monthYear,
                 yValueMapper: (PreviousCovid prevData, _) => prevData.casesMY,
-                dataLabelSettings: DataLabelSettings(isVisible: true) // Enables the data label.
+                dataLabelSettings: DataLabelSettings(isVisible: true),
+                color: customColor['Salmon'] // Enables the data label.
               )
             ],
     );

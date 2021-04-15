@@ -68,6 +68,9 @@ class _CovidPageState extends State<CovidPage> {
   }
 
   Widget drawerMenu = DrawerSection();
+  Map customColor = getCustomColors();
+  String subheader = 'CHOOSE HOW TO VISUALIZE THE LATET COVID-19 DATA';
+
 
   @override
   Widget build(BuildContext context) {
@@ -98,26 +101,15 @@ class _CovidPageState extends State<CovidPage> {
               child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 30, 0, 10),
+                padding: const EdgeInsets.fromLTRB(50, 30, 50, 20),
                 child: Text(
-                header,
-                textAlign: TextAlign.center,
-                style: 
-                Theme.of(context)
-                  .textTheme
-                  .headline3
-                  .copyWith(color: customColors()['Dark Salmon'], fontWeight: FontWeight.w900, fontStyle: FontStyle.italic),
-                ),// myBgColors[4].color
-
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 10, 0, 5),
-                child: Text(
-                  'Visualization type:',
+                  subheader,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 0.25),
-                    fontSize: 16,
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w500,
                   )
                 ),
               ),
@@ -131,7 +123,7 @@ class _CovidPageState extends State<CovidPage> {
                     }), 
                   child: Text('Linear Graph'), 
                   style: ElevatedButton.styleFrom(
-                    primary: showLineGraph? Colors.purple : Colors.grey,
+                    primary: showLineGraph? customColor['Dark Salmon'] : Colors.grey,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     textStyle: TextStyle(
                       fontSize: 12,
@@ -146,7 +138,7 @@ class _CovidPageState extends State<CovidPage> {
                     }), 
                   child: Text('Pie Chart'),
                   style: ElevatedButton.styleFrom(
-                    primary: showPieChart?  Colors.purple : Colors.grey,
+                    primary: showPieChart? customColor['Dark Salmon']  : Colors.grey,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     textStyle: TextStyle(
                       fontSize: 12,
@@ -161,11 +153,11 @@ class _CovidPageState extends State<CovidPage> {
                     }), 
                   child: Text('Bubble Chart'),
                    style: ElevatedButton.styleFrom(
-                    primary: showBubbleChart? Colors.purple : Colors.grey,
+                    primary: showBubbleChart? customColor['Dark Salmon']  : Colors.grey,
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
                     textStyle: TextStyle(
                       fontSize: 12,
-                      fontWeight: FontWeight.bold
+                      fontWeight: FontWeight.bold,
                       )
                     ),
                   )
@@ -191,7 +183,7 @@ class _CovidPageState extends State<CovidPage> {
                   'The data used:',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Color.fromRGBO(200, 150, 255, 0.8),
+                    color: customColor['Salmon'],
                     fontSize: 24,
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.bold
