@@ -1,4 +1,5 @@
-import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
+/*import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
+import 'package:corona_stats_app/app/services/climateAPI/data_repositories.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
@@ -31,7 +32,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
         _climateApi = ClimateApi();
 
   _worldPopulationDensityDetails = <_CountryDensityModel>[
-      _CountryDensityModel('Sweden', _average),
+      _CountryDensityModel('Sweden', _ClimatePageState() ),
       _CountryDensityModel('United States of America', _average)
     ];
 
@@ -362,4 +363,4 @@ class _CountryDensityModel {
 
   final String countryName;
   final double density;
-}
+}*/
