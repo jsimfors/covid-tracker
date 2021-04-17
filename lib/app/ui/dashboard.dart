@@ -46,7 +46,7 @@ class _DashboardState extends State<Dashboard> {
             Container(
               child: Column(children: [
                 climateSection,
-                mapSection
+                //mapSection
               ],),
 
             ),

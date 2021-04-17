@@ -1,14 +1,15 @@
-/*import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
+import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
 import 'package:corona_stats_app/app/services/climateAPI/data_repositories.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
 class WorldMapPage extends StatefulWidget {
-  WorldMapPage({Key key, this.title, this.url}) : super(key: key);
+  WorldMapPage({Key key, this.title, this.url, this.averageFromAPI}) : super(key: key);
 
   final String title;
   static const String routeName = '/climate';
   final String url;
+  final double averageFromAPI;
 
   @override
   _WorldMapPageState createState() => _WorldMapPageState();
@@ -21,7 +22,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
 
   MapShapeSource _mapShapeSource;
   ClimateApi _climateApi;
-  double _average;
+  double _average = 404;
 
   @override
   void initState() {
@@ -32,8 +33,8 @@ class _WorldMapPageState extends State<WorldMapPage> {
         _climateApi = ClimateApi();
 
   _worldPopulationDensityDetails = <_CountryDensityModel>[
-      _CountryDensityModel('Sweden', _ClimatePageState() ),
-      _CountryDensityModel('United States of America', _average)
+      _CountryDensityModel('Germany', widget.averageFromAPI!=null?widget.averageFromAPI:100 ),
+      _CountryDensityModel('United States of America', 20)
     ];
 
 
@@ -327,10 +328,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Text('World Annual Rainfall per Country'),
-        ),
+        //Text(widget.averageFromAPI.toString()),
         SfMaps(
           layers: [
             MapShapeLayer(
@@ -344,6 +342,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
       ],
     );
   }
+  /*
   Future<double> getAverageForMap(String code) async {
     var value = await _climateApi.getAverageAnnual(
       fromYear: int.parse('1980'),
@@ -355,7 +354,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
       _average = value;
     });
     return value;
-  }
+  }*/
 }
 
 class _CountryDensityModel {
@@ -363,4 +362,4 @@ class _CountryDensityModel {
 
   final String countryName;
   final double density;
-}*/
+}
