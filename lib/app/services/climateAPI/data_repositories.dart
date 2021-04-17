@@ -22,7 +22,11 @@ class _ClimatePageState extends State<ClimatePage> {
   final TextEditingController _rainOrTemp = TextEditingController();
   ClimateApi _climateApi;
   double _average;
-  double _averageVal;
+  double _averageVal1;
+  double _averageVal2;
+  double _averageVal3;
+  List<double> _averageValList;
+
 
   @override
   void initState() {
@@ -78,11 +82,11 @@ class _ClimatePageState extends State<ClimatePage> {
               child: Text('World Annual Rainfall per Country'),
             ),
              Text(
-              '${_averageVal ?? ''}',
+              '${_averageVal1 ?? ''}',
               key: ValueKey('average'),
               style: Theme.of(context).textTheme.display1,
             ),
-            WorldMapPage(averageFromAPI: _averageVal)
+            WorldMapPage(averageFromAPI: _averageValList)
           ],
         ),
       );
@@ -101,18 +105,51 @@ class _ClimatePageState extends State<ClimatePage> {
   }
 
  Future<void> getValues() async {
-    var value = await _climateApi.getAverageAnnual(
+   List<String> countryISOhardcode = ['SWE', 'USA', 'BRA'];
+
+
+  // Sweden
+    var value1 = await _climateApi.getAverageAnnual(
       fromYear: int.parse('1980'),
       toYear: int.parse('1999'),
       rainOrTemp: 'pr',
-      countryISOs: ['SWE'],
+      countryISOs: countryISOhardcode.sublist(0)
     );
     setState(() {
-      _averageVal = value;
+      _averageVal1 = value1;
        /*Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
                   return WorldMapPage(averageFromAPI: value);
                 }));*/
+    });
 
+    // USA
+    var value2 = await _climateApi.getAverageAnnual(
+      fromYear: int.parse('1980'),
+      toYear: int.parse('1999'),
+      rainOrTemp: 'pr',
+      countryISOs: countryISOhardcode.sublist(1)
+    );
+    setState(() {
+      _averageVal2 = value2;
+       /*Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+                  return WorldMapPage(averageFromAPI: value);
+                }));*/
+    });
+
+    // Brazil
+    var value3 = await _climateApi.getAverageAnnual(
+      fromYear: int.parse('1980'),
+      toYear: int.parse('1999'),
+      rainOrTemp: 'pr',
+      countryISOs: countryISOhardcode.sublist(2)
+    );
+    setState(() {
+      _averageVal3 = value3;
+      _averageValList = [_averageVal1, _averageVal2, _averageVal3];
+
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+                  return WorldMapPage(averageFromAPI: _averageValList);
+                }));
     });
   }
 

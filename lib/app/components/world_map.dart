@@ -9,7 +9,7 @@ class WorldMapPage extends StatefulWidget {
   final String title;
   static const String routeName = '/climate';
   final String url;
-  final double averageFromAPI;
+  final List<double> averageFromAPI;
 
   @override
   _WorldMapPageState createState() => _WorldMapPageState();
@@ -31,10 +31,16 @@ class _WorldMapPageState extends State<WorldMapPage> {
         _climateApi = ClimateApi(apiUrl: widget.url);
       else
         _climateApi = ClimateApi();
+      if (widget.averageFromAPI!=null)
+        print(widget.averageFromAPI);
+      else
+        print("The list is null");
 
   _worldPopulationDensityDetails = <_CountryDensityModel>[
-      _CountryDensityModel('Germany', widget.averageFromAPI!=null?widget.averageFromAPI:100 ),
-      _CountryDensityModel('United States of America', 20)
+      _CountryDensityModel('Germany', widget.averageFromAPI!=null?widget.averageFromAPI[0]:10 ),
+      _CountryDensityModel('United States of America',  widget.averageFromAPI!=null?widget.averageFromAPI[1]:10),
+      _CountryDensityModel('Brazil',  widget.averageFromAPI!=null?widget.averageFromAPI[2]:10)
+
     ];
 
 
@@ -288,26 +294,26 @@ class _WorldMapPageState extends State<WorldMapPage> {
       shapeColorMappers: const [
         MapColorMapper(
             from: 0,
-            to: 25,
+            to: 900,
             color: Color.fromRGBO(223, 169, 254, 1),
             text: '{0},{25}'),
         MapColorMapper(
-            from: 25,
-            to: 75,
+            from: 900,
+            to: 1000,
             color: Color.fromRGBO(190, 78, 253, 1),
             text: '75'),
         MapColorMapper(
-            from: 75,
-            to: 150,
+            from: 1000,
+            to: 1100,
             color: Color.fromRGBO(167, 17, 252, 1),
             text: '150'),
         MapColorMapper(
-            from: 150,
-            to: 400,
+            from: 1100,
+            to: 1300,
             color: Color.fromRGBO(152, 3, 236, 1),
             text: '400'),
         MapColorMapper(
-            from: 400,
+            from: 1300,
             to: 50000,
             color: Color.fromRGBO(113, 2, 176, 1),
             text: '>500'),
@@ -328,7 +334,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        //Text(widget.averageFromAPI.toString()),
+        //Text(widget.averageFromAPI=!null?'Text1':'Text2',
         SfMaps(
           layers: [
             MapShapeLayer(
