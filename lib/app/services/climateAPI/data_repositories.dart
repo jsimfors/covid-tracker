@@ -148,13 +148,14 @@ class _ClimatePageState extends State<ClimatePage> {
       _averageVal3 = value3;
       _averageValList = [_averageVal1, _averageVal2, _averageVal3];
 
-       Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-                  return Dashboard(averageFromAPI: _averageValList);
+       Navigator.push(
+         context, 
+         PageRouteBuilder(
+           pageBuilder: (context, __, _) =>  Dashboard(averageFromAPI: _averageValList),
+           transitionDuration: Duration(seconds: 0)
                   //WorldMapPage(averageFromAPI: _averageValList);
-                }));
+       ));
     });
   }
 
 }
-
-
