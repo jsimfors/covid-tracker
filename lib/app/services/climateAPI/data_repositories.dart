@@ -10,7 +10,8 @@ class ClimatePage extends StatefulWidget {
 
   final String url;
   final List<double> averageFromAPI;
-  const ClimatePage({Key key, this.url, this.averageFromAPI}) : super(key: key);
+  final List<String> countryISO;
+  const ClimatePage({Key key, this.url, this.averageFromAPI, this.countryISO}) : super(key: key);
 
   @override
   _ClimatePageState createState() => _ClimatePageState();
@@ -20,13 +21,15 @@ class _ClimatePageState extends State<ClimatePage> {
   final TextEditingController _fromYearController = TextEditingController();
   final TextEditingController _toYearController = TextEditingController();
   final TextEditingController _countryISOsController = TextEditingController();
-  final TextEditingController _rainOrTemp = TextEditingController();
+  String _rainOrTemp;
+
   ClimateApi _climateApi;
   double _average;
   double _averageVal1;
   double _averageVal2;
   double _averageVal3;
   List<double> _averageValList;
+  List<String> _listOfCountries;
 
 
   @override
@@ -62,21 +65,20 @@ class _ClimatePageState extends State<ClimatePage> {
               keyboardType: TextInputType.number,
             ),
             TextField(
-              key: ValueKey('rainOrTemp'),
-              controller: _rainOrTemp,
-              decoration: InputDecoration(hintText: 'pr or tas'),
-              keyboardType: TextInputType.number,
-            ),
-            TextField(
               key: ValueKey('countryISOs'),
               controller: _countryISOsController,
               decoration:
                   InputDecoration(hintText: 'Country ISOs (space separated)'),
             ),
             ElevatedButton(
-              key: ValueKey('getAverage'),
+              key: ValueKey('getAverageRain'),
               child: Text('Get Average Annual Rainfall'),
-              onPressed: getValues, //getAverage,
+              onPressed: () => getAverage('pr'), //getAverage,
+            ),
+            ElevatedButton(
+              key: ValueKey('getAverageTemp'),
+              child: Text('Get Average Annual Temperature'),
+              onPressed: () => getAverage('tas'), //getAverage,
             ),
              Padding(
               padding: const EdgeInsets.all(10.0),
@@ -87,25 +89,50 @@ class _ClimatePageState extends State<ClimatePage> {
               key: ValueKey('average'),
               style: Theme.of(context).textTheme.display1,
             ),
-            WorldMapPage(averageFromAPI: widget.averageFromAPI)
+            WorldMapPage(averageFromAPI: widget.averageFromAPI, countryISO: widget.countryISO)
           ],
         ),
       );
   }
-
+/*
  Future<void> getAverage() async {
     var value = await _climateApi.getAverageAnnual(
       fromYear: int.parse(_fromYearController.text),
       toYear: int.parse(_toYearController.text),
-      rainOrTemp: _rainOrTemp.text,
+      rainOrTemp: "_rainOrTemp.text",
       countryISOs: _countryISOsController.text.split(' '),
     );
     setState(() {
       _average = value;
     });
   }
+  */
 
- Future<void> getValues() async {
+   Future<void> getAverage(typeofdata) async {
+     // To use in future!
+    var valueList = await _climateApi.getAverageAnnual(
+      fromYear: int.parse(_fromYearController.text),
+      toYear: int.parse(_toYearController.text),
+      rainOrTemp: typeofdata,
+      countryISOs: _countryISOsController.text.split(' '),
+    );
+    setState(() {
+      //_average = value;
+      _averageValList = valueList;
+      _listOfCountries = _countryISOsController.text.split(' ');
+
+       Navigator.push(
+         context, 
+         PageRouteBuilder(
+           pageBuilder: (context, __, _) =>  Dashboard(countryISO: ['SWE', 'USA', 'BRA'], averageFromAPI: _averageValList),
+           transitionDuration: Duration(seconds: 0)
+                  //WorldMapPage(averageFromAPI: _averageValList);
+       ));
+
+    });
+  }
+/*
+ Future<void> getValuesRain() async {
    List<String> countryISOhardcode = ['SWE', 'USA', 'BRA'];
 
 
@@ -118,9 +145,9 @@ class _ClimatePageState extends State<ClimatePage> {
     );
     setState(() {
       _averageVal1 = value1;
-       /*Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
                   return WorldMapPage(averageFromAPI: value);
-                }));*/
+                }));
     });
 
     // USA
@@ -132,9 +159,9 @@ class _ClimatePageState extends State<ClimatePage> {
     );
     setState(() {
       _averageVal2 = value2;
-       /*Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
                   return WorldMapPage(averageFromAPI: value);
-                }));*/
+                }));
     });
 
     // Brazil
@@ -158,4 +185,56 @@ class _ClimatePageState extends State<ClimatePage> {
     });
   }
 
-}
+
+ Future<void> getValuesTemp() async {
+   List<String> countryISOhardcode = ['SWE', 'USA', 'BRA'];
+
+
+  // Sweden
+    var value1 = await _climateApi.getAverageAnnual(
+      fromYear: int.parse('1980'),
+      toYear: int.parse('1999'),
+      rainOrTemp: 'tas',
+      countryISOs: countryISOhardcode.sublist(0)
+    );
+    setState(() {
+      _averageVal1 = value1;
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+                  return WorldMapPage(averageFromAPI: value);
+                }));
+    });
+
+    // USA
+    var value2 = await _climateApi.getAverageAnnual(
+      fromYear: int.parse('1980'),
+      toYear: int.parse('1999'),
+      rainOrTemp: 'tas',
+      countryISOs: countryISOhardcode.sublist(1)
+    );
+    setState(() {
+      _averageVal2 = value2;
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
+                  return WorldMapPage(averageFromAPI: value);
+                }));
+    });
+
+    // Brazil
+    var value3 = await _climateApi.getAverageAnnual(
+      fromYear: int.parse('1980'),
+      toYear: int.parse('1999'),
+      rainOrTemp: 'tas',
+      countryISOs: countryISOhardcode.sublist(2)
+    );
+    setState(() {
+      _averageVal3 = value3;
+      _averageValList = [_averageVal1, _averageVal2, _averageVal3];
+
+       Navigator.push(
+         context, 
+         PageRouteBuilder(
+           pageBuilder: (context, __, _) =>  Dashboard(averageFromAPI: _averageValList),
+           transitionDuration: Duration(seconds: 0)
+                  //WorldMapPage(averageFromAPI: _averageValList);
+       ));
+    });*/
+  }

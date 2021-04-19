@@ -9,8 +9,9 @@ class Dashboard extends StatefulWidget {
   // Dashboard: current homepage: map & climate page. 
   // TODO: add proper landing screen.
   final List<double> averageFromAPI;
+  final List<String> countryISO;
 
-  const Dashboard({Key key, this.averageFromAPI}) : super(key: key);
+  const Dashboard({Key key, this.averageFromAPI, this.countryISO}) : super(key: key);
 
   @override
   _DashboardState createState() => _DashboardState();
@@ -20,7 +21,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
 
-    Widget climateSection = ClimatePage(averageFromAPI: widget.averageFromAPI);
+    Widget climateSection = ClimatePage(averageFromAPI: widget.averageFromAPI, countryISO: widget.countryISO);
     //Widget mapSection = MapsPage();
     //Widget mapSection = WorldMapPage();
     Widget drawerMenu = DrawerSection();

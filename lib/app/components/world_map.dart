@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
 class WorldMapPage extends StatefulWidget {
-  WorldMapPage({Key key, this.title, this.url, this.averageFromAPI}) : super(key: key);
+  WorldMapPage({Key key, this.title, this.url, this.averageFromAPI, this.countryISO}) : super(key: key);
 
   final String title;
   static const String routeName = '/climate';
   final String url;
   final List<double> averageFromAPI;
+  final List<String> countryISO;
 
   @override
   _WorldMapPageState createState() => _WorldMapPageState();
@@ -35,6 +36,14 @@ class _WorldMapPageState extends State<WorldMapPage> {
         print(widget.averageFromAPI);
       else
         print("The list is null");
+
+  if(widget.countryISO!=null)
+    List<String> countryCodeList;
+    for(int i = 0; i<widget.countryISO.length; i++){
+      print(widget.countryISO[i]);
+      // TODO
+
+    }
 
   _worldPopulationDensityDetails = <_CountryDensityModel>[
       _CountryDensityModel('Germany', widget.averageFromAPI!=null?widget.averageFromAPI[0]:10 ),
