@@ -8,7 +8,10 @@ import 'package:flutter/material.dart';
 class Dashboard extends StatefulWidget {
   // Dashboard: current homepage: map & climate page. 
   // TODO: add proper landing screen.
-  
+  final List<double> averageFromAPI;
+
+  const Dashboard({Key key, this.averageFromAPI}) : super(key: key);
+
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -17,9 +20,9 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
 
-    Widget climateSection = ClimatePage();
+    Widget climateSection = ClimatePage(averageFromAPI: widget.averageFromAPI);
     //Widget mapSection = MapsPage();
-    Widget mapSection = WorldMapPage();
+    //Widget mapSection = WorldMapPage();
     Widget drawerMenu = DrawerSection();
 
     return Scaffold(

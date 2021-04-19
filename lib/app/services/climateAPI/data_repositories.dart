@@ -2,14 +2,15 @@
 import 'package:corona_stats_app/app/components/maps.dart';
 import 'package:corona_stats_app/app/components/world_map.dart';
 import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
+import 'package:corona_stats_app/app/ui/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class ClimatePage extends StatefulWidget {
   static const String routeName = '/climate';
 
   final String url;
-
-  const ClimatePage({Key key, this.url}) : super(key: key);
+  final List<double> averageFromAPI;
+  const ClimatePage({Key key, this.url, this.averageFromAPI}) : super(key: key);
 
   @override
   _ClimatePageState createState() => _ClimatePageState();
@@ -86,7 +87,7 @@ class _ClimatePageState extends State<ClimatePage> {
               key: ValueKey('average'),
               style: Theme.of(context).textTheme.display1,
             ),
-            WorldMapPage(averageFromAPI: _averageValList)
+            WorldMapPage(averageFromAPI: widget.averageFromAPI)
           ],
         ),
       );
@@ -147,8 +148,9 @@ class _ClimatePageState extends State<ClimatePage> {
       _averageVal3 = value3;
       _averageValList = [_averageVal1, _averageVal2, _averageVal3];
 
-       Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) {
-                  return WorldMapPage(averageFromAPI: _averageValList);
+       Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+                  return Dashboard(averageFromAPI: _averageValList);
+                  //WorldMapPage(averageFromAPI: _averageValList);
                 }));
     });
   }
