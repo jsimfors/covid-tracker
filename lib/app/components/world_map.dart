@@ -2,6 +2,9 @@ import 'package:corona_stats_app/app/services/climateAPI/api_service.dart';
 import 'package:corona_stats_app/app/services/climateAPI/data_repositories.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
+import 'package:flutter/services.dart' show rootBundle;
+
+import 'package:csv/csv.dart';
 
 class WorldMapPage extends StatefulWidget {
   WorldMapPage({Key key, this.title, this.url, this.averageFromAPI, this.countryISO}) : super(key: key);
@@ -36,14 +39,49 @@ class _WorldMapPageState extends State<WorldMapPage> {
         print(widget.averageFromAPI);
       else
         print("The list is null");
-
+/*
   if(widget.countryISO!=null)
     List<String> countryCodeList;
     for(int i = 0; i<widget.countryISO.length; i++){
       print(widget.countryISO[i]);
       // TODO
 
-    }
+    }*/
+    
+    List<List<dynamic>> _data = [];
+    List<String> countryNames = [];
+    
+
+    Future<List> _loadCSV() async {
+    final _rawData = await rootBundle.loadString("assets/iso-country-codes.csv");
+    List<List<dynamic>> _listData = CsvToListConverter().convert(_rawData);
+    setState(() {
+      _data = _listData;
+      //print("the data: " + _data.toString());
+      // Vill: matcha widget.countryISO[0] med _data[i][kolumn 2]. 
+      // är de matchar vill jag returnera _data[i][kolumn 0]
+      if(widget.countryISO!=null){
+        for(int i = 7; i<30; i=i+5){
+          print("The country ISO to match: " + widget.countryISO[0]);
+          print("trying to match with: " +  _data[0][i]);
+          if(widget.countryISO[0]== _data[0][i]){
+            print("Match! " + widget.countryISO[0] + " is " + _data[0][i-2]);
+            countryNames.add(_data[0][i-2]);
+            break;
+          }
+        }
+        /*
+        print("The country ISO: " + widget.countryISO[0]);
+        print("The matching on line 1: (AFG?) " + _data[0][7]);
+        print("Matching country name: " +  _data[0][5]);
+        print("The matching on line 2: (ALA?) " + _data[0][7+5]);
+        print("Matching country name: " +  _data[0][10]);
+        */
+      }
+
+    });
+  }
+  _loadCSV();
 
   _worldPopulationDensityDetails = <_CountryDensityModel>[
       _CountryDensityModel('Germany', widget.averageFromAPI!=null?widget.averageFromAPI[0]:10 ),
@@ -51,6 +89,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
       _CountryDensityModel('Brazil',  widget.averageFromAPI!=null?widget.averageFromAPI[2]:10)
 
     ];
+
 
 
 
@@ -329,7 +368,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
       ],
     );
     super.initState();
-
+  
   }
 
   // @override
@@ -337,7 +376,6 @@ class _WorldMapPageState extends State<WorldMapPage> {
   //   _worldPopulationDensityDetails?.clear();
   //   super.dispose();
   // }
-
   @override
   Widget build(BuildContext context) {
     return Column(

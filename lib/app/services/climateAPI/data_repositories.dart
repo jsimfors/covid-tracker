@@ -124,7 +124,7 @@ class _ClimatePageState extends State<ClimatePage> {
        Navigator.push(
          context, 
          PageRouteBuilder(
-           pageBuilder: (context, __, _) =>  Dashboard(countryISO: ['SWE', 'USA', 'BRA'], averageFromAPI: _averageValList),
+           pageBuilder: (context, __, _) =>  Dashboard(countryISO: ['AFG'], averageFromAPI: _averageValList),
            transitionDuration: Duration(seconds: 0)
                   //WorldMapPage(averageFromAPI: _averageValList);
        ));
