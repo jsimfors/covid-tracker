@@ -25,6 +25,7 @@ class _ClimatePageState extends State<ClimatePage> {
 
   ClimateApi _climateApi;
   double _average;
+  String _averageString;
   double _averageVal1;
   double _averageVal2;
   double _averageVal3;
@@ -70,22 +71,38 @@ class _ClimatePageState extends State<ClimatePage> {
               decoration:
                   InputDecoration(hintText: 'Country ISOs (space separated)'),
             ),
-            ElevatedButton(
-              key: ValueKey('getAverageRain'),
-              child: Text('Get Average Annual Rainfall'),
-              onPressed: () => getAverage('pr'), //getAverage,
+             Padding(
+               padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+               child: Text(
+                'Get Average Annual: ',
+                style: Theme.of(context).textTheme.headline6, textAlign: TextAlign.center
             ),
-            ElevatedButton(
-              key: ValueKey('getAverageTemp'),
-              child: Text('Get Average Annual Temperature'),
-              onPressed: () => getAverage('tas'), //getAverage,
+             ),
+            Row(  
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  key: ValueKey('getAverageRain'),
+                  child: Text('Rainfall'),
+                  onPressed: () => getAverage('pr'), //getAverage,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  key: ValueKey('getAverageTemp'),
+                  child: Text('Temperature'),
+                  onPressed: () => getAverage('tas'), //getAverage,
+            ),
+              ),],
             ),
              Padding(
               padding: const EdgeInsets.all(10.0),
               child: (_displayRain?Text('World Annual rainfall per Country'):Text('World Annual temperature per Country')),
             ),
-             Text(
-              '${_average ?? ''}',
+             Text((_displayRain?'${_averageString ?? ''} mm':'${_averageString ?? ''}°C'),
               key: ValueKey('average'),
               style: Theme.of(context).textTheme.headline6,
             ),
@@ -109,6 +126,8 @@ class _ClimatePageState extends State<ClimatePage> {
   */
 
    Future<void> getAverage(typeofdata) async {
+    typeofdata=='pr'?_displayRain==true:_displayRain=false;
+
      // To use in future!
     var value = await _climateApi.getAverageAnnual(
       fromYear: int.parse(_fromYearController.text),
@@ -117,8 +136,8 @@ class _ClimatePageState extends State<ClimatePage> {
       countryISOs: _countryISOsController.text.split(' '),
     );
     setState(() {
-      typeofdata=='pr'?_displayRain==true:_displayRain=false;
       _average = value;
+      _averageString = value.toStringAsFixed(1);
       //_averageValList = valueList;
       _listOfCountries = _countryISOsController.text.split(' ');
 
