@@ -21,7 +21,7 @@ class _ClimatePageState extends State<ClimatePage> {
   final TextEditingController _fromYearController = TextEditingController();
   final TextEditingController _toYearController = TextEditingController();
   final TextEditingController _countryISOsController = TextEditingController();
-  String _rainOrTemp;
+  bool _displayRain = true;
 
   ClimateApi _climateApi;
   double _average;
@@ -82,12 +82,12 @@ class _ClimatePageState extends State<ClimatePage> {
             ),
              Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Text('World Annual Rainfall per Country'),
+              child: (_displayRain?Text('World Annual rainfall per Country'):Text('World Annual temperature per Country')),
             ),
              Text(
-              '${_averageVal1 ?? ''}',
+              '${_average ?? ''}',
               key: ValueKey('average'),
-              style: Theme.of(context).textTheme.display1,
+              style: Theme.of(context).textTheme.headline6,
             ),
             WorldMapPage(averageFromAPI: widget.averageFromAPI, countryISO: widget.countryISO)
           ],
@@ -110,25 +110,27 @@ class _ClimatePageState extends State<ClimatePage> {
 
    Future<void> getAverage(typeofdata) async {
      // To use in future!
-    var valueList = await _climateApi.getAverageAnnual(
+    var value = await _climateApi.getAverageAnnual(
       fromYear: int.parse(_fromYearController.text),
       toYear: int.parse(_toYearController.text),
       rainOrTemp: typeofdata,
       countryISOs: _countryISOsController.text.split(' '),
     );
     setState(() {
-      //_average = value;
-      _averageValList = valueList;
+      typeofdata=='pr'?_displayRain==true:_displayRain=false;
+      _average = value;
+      //_averageValList = valueList;
       _listOfCountries = _countryISOsController.text.split(' ');
 
+    /* For future implementation, to pass data to WorldMapPage: (display data in map)
        Navigator.push(
          context, 
          PageRouteBuilder(
-           pageBuilder: (context, __, _) =>  Dashboard(countryISO: ['AFG'], averageFromAPI: _averageValList),
+           pageBuilder: (context, __, _) =>  Dashboard(averageFromAPI: _averageValList),
            transitionDuration: Duration(seconds: 0)
                   //WorldMapPage(averageFromAPI: _averageValList);
        ));
-
+    */
     });
   }
 /*

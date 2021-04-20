@@ -23,6 +23,8 @@ class _WorldMapPageState extends State<WorldMapPage> {
 
   List<_CountryDensityModel> _worldPopulationDensityDetails;
   List<_CountryDensityModel> _worldPopulationDensityDetails2;
+  List<_CountryDensityModel> _dataEurope;
+
 
   MapShapeSource _mapShapeSource;
   ClimateApi _climateApi;
@@ -52,37 +54,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
     List<String> countryNames = [];
     
 
-    Future<List> _loadCSV() async {
-    final _rawData = await rootBundle.loadString("assets/iso-country-codes.csv");
-    List<List<dynamic>> _listData = CsvToListConverter().convert(_rawData);
-    setState(() {
-      _data = _listData;
-      //print("the data: " + _data.toString());
-      // Vill: matcha widget.countryISO[0] med _data[i][kolumn 2]. 
-      // är de matchar vill jag returnera _data[i][kolumn 0]
-      if(widget.countryISO!=null){
-        for(int i = 7; i<30; i=i+5){
-          print("The country ISO to match: " + widget.countryISO[0]);
-          print("trying to match with: " +  _data[0][i]);
-          if(widget.countryISO[0]== _data[0][i]){
-            print("Match! " + widget.countryISO[0] + " is " + _data[0][i-2]);
-            countryNames.add(_data[0][i-2]);
-            break;
-          }
-        }
-        /*
-        print("The country ISO: " + widget.countryISO[0]);
-        print("The matching on line 1: (AFG?) " + _data[0][7]);
-        print("Matching country name: " +  _data[0][5]);
-        print("The matching on line 2: (ALA?) " + _data[0][7+5]);
-        print("Matching country name: " +  _data[0][10]);
-        */
-      }
-
-    });
-  }
-  _loadCSV();
-
+/*
   _worldPopulationDensityDetails = <_CountryDensityModel>[
       _CountryDensityModel('Germany', widget.averageFromAPI!=null?widget.averageFromAPI[0]:10 ),
       _CountryDensityModel('United States of America',  widget.averageFromAPI!=null?widget.averageFromAPI[1]:10),
@@ -90,10 +62,17 @@ class _WorldMapPageState extends State<WorldMapPage> {
 
     ];
 
+  if(widget.averageFromAPI!=null){
+    _dataEurope = <_CountryDensityModel>[
+      _CountryDensityModel('Germany', widget.averageFromAPI!=null?widget.averageFromAPI[0]:10 ),
+      _CountryDensityModel('United States of America',  widget.averageFromAPI!=null?widget.averageFromAPI[1]:10),
+      _CountryDensityModel('Brazil',  widget.averageFromAPI!=null?widget.averageFromAPI[2]:10)
 
+    ];
+  }
+  */
 
-
-    _worldPopulationDensityDetails2 = <_CountryDensityModel>[
+    _worldPopulationDensityDetails = <_CountryDensityModel>[
       _CountryDensityModel('Monaco', 26337),
       _CountryDensityModel('Macao', 21717),
       _CountryDensityModel('Singapore', 8358),
@@ -342,26 +321,26 @@ class _WorldMapPageState extends State<WorldMapPage> {
       shapeColorMappers: const [
         MapColorMapper(
             from: 0,
-            to: 900,
+            to: 25,
             color: Color.fromRGBO(223, 169, 254, 1),
             text: '{0},{25}'),
         MapColorMapper(
-            from: 900,
-            to: 1000,
+            from: 26,
+            to: 75,
             color: Color.fromRGBO(190, 78, 253, 1),
             text: '75'),
         MapColorMapper(
-            from: 1000,
-            to: 1100,
+            from: 76,
+            to: 150,
             color: Color.fromRGBO(167, 17, 252, 1),
             text: '150'),
         MapColorMapper(
-            from: 1100,
-            to: 1300,
+            from: 151,
+            to: 400,
             color: Color.fromRGBO(152, 3, 236, 1),
             text: '400'),
         MapColorMapper(
-            from: 1300,
+            from: 401,
             to: 50000,
             color: Color.fromRGBO(113, 2, 176, 1),
             text: '>500'),
@@ -371,17 +350,17 @@ class _WorldMapPageState extends State<WorldMapPage> {
   
   }
 
-  // @override
-  // void dispose() {
-  //   _worldPopulationDensityDetails?.clear();
-  //   super.dispose();
-  // }
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        //Text(widget.averageFromAPI=!null?'Text1':'Text2',
+      children: [ Padding(
+        padding: const EdgeInsets.fromLTRB(0, 40, 0, 0),
+        child: Text(
+                'World Population Density',
+                style: Theme.of(context).textTheme.headline5,
+              ),
+      ),
         SfMaps(
           layers: [
             MapShapeLayer(

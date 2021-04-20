@@ -11,18 +11,16 @@ class ClimateApi {
 
   ClimateApi({this.apiUrl = climateApiUrl});
 
-  Future<List<double>> getAverageAnnual({
+  Future<double> getAverageAnnual({
     int fromYear,
     int toYear,
     String rainOrTemp,
     List<String> countryISOs,
     List<double> averageList,
-    List<double> testList
 
   }) async {
     double sum = 0;
     averageList = [10];
-    testList = [800, 1100, 2000];
     for (String countryISO in countryISOs) {
       String url =
           '$apiUrl/climateweb/rest/v1/country/annualavg/$rainOrTemp/$fromYear/$toYear/$countryISO.xml';
@@ -52,7 +50,6 @@ class ClimateApi {
         throw Exception('Error occured while trying to send request to API');
       }
     }
-    return testList;
-    //return sum / countryISOs.length;
+    return sum / countryISOs.length;
   }
 }
