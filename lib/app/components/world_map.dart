@@ -22,13 +22,9 @@ class WorldMapPage extends StatefulWidget {
 class _WorldMapPageState extends State<WorldMapPage> {
 
   List<_CountryDensityModel> _worldPopulationDensityDetails;
-  List<_CountryDensityModel> _worldPopulationDensityDetails2;
-  List<_CountryDensityModel> _dataEurope;
-
 
   MapShapeSource _mapShapeSource;
   ClimateApi _climateApi;
-  double _average = 404;
 
   @override
   void initState() {
@@ -37,40 +33,6 @@ class _WorldMapPageState extends State<WorldMapPage> {
         _climateApi = ClimateApi(apiUrl: widget.url);
       else
         _climateApi = ClimateApi();
-      if (widget.averageFromAPI!=null)
-        print(widget.averageFromAPI);
-      else
-        print("The list is null");
-/*
-  if(widget.countryISO!=null)
-    List<String> countryCodeList;
-    for(int i = 0; i<widget.countryISO.length; i++){
-      print(widget.countryISO[i]);
-      // TODO
-
-    }*/
-    
-    List<List<dynamic>> _data = [];
-    List<String> countryNames = [];
-    
-
-/*
-  _worldPopulationDensityDetails = <_CountryDensityModel>[
-      _CountryDensityModel('Germany', widget.averageFromAPI!=null?widget.averageFromAPI[0]:10 ),
-      _CountryDensityModel('United States of America',  widget.averageFromAPI!=null?widget.averageFromAPI[1]:10),
-      _CountryDensityModel('Brazil',  widget.averageFromAPI!=null?widget.averageFromAPI[2]:10)
-
-    ];
-
-  if(widget.averageFromAPI!=null){
-    _dataEurope = <_CountryDensityModel>[
-      _CountryDensityModel('Germany', widget.averageFromAPI!=null?widget.averageFromAPI[0]:10 ),
-      _CountryDensityModel('United States of America',  widget.averageFromAPI!=null?widget.averageFromAPI[1]:10),
-      _CountryDensityModel('Brazil',  widget.averageFromAPI!=null?widget.averageFromAPI[2]:10)
-
-    ];
-  }
-  */
 
     _worldPopulationDensityDetails = <_CountryDensityModel>[
       _CountryDensityModel('Monaco', 26337),
@@ -374,19 +336,6 @@ class _WorldMapPageState extends State<WorldMapPage> {
       ],
     );
   }
-  /*
-  Future<double> getAverageForMap(String code) async {
-    var value = await _climateApi.getAverageAnnual(
-      fromYear: int.parse('1980'),
-      toYear: int.parse('1999'),
-      rainOrTemp: 'pr',
-      countryISOs: [code],
-    );
-    setState(() {
-      _average = value;
-    });
-    return value;
-  }*/
 }
 
 class _CountryDensityModel {
