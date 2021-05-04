@@ -26,9 +26,6 @@ class _ClimatePageState extends State<ClimatePage> {
   ClimateApi _climateApi;
   double _average;
   String _averageString;
-  double _averageVal1;
-  double _averageVal2;
-  double _averageVal3;
   List<double> _averageValList;
   List<String> _listOfCountries;
 

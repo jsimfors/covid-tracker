@@ -1,13 +1,9 @@
 import 'package:corona_stats_app/app/components/drawer.dart';
-import 'package:corona_stats_app/app/components/maps.dart';
-import 'package:corona_stats_app/app/components/world_map.dart';
 import 'package:corona_stats_app/app/services/climateAPI/data_repositories.dart';
-import 'package:corona_stats_app/app/ui/dashborad_nCov.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
   // Dashboard: current homepage: map & climate page. 
-  // TODO: add proper landing screen.
   final List<double> averageFromAPI;
   final List<String> countryISO;
 
@@ -22,8 +18,6 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
 
     Widget climateSection = ClimatePage(averageFromAPI: widget.averageFromAPI, countryISO: widget.countryISO);
-    //Widget mapSection = MapsPage();
-    //Widget mapSection = WorldMapPage();
     Widget drawerMenu = DrawerSection();
 
     return Scaffold(
@@ -57,16 +51,6 @@ class _DashboardState extends State<Dashboard> {
             Container(
               
             )
-            
-            
-            /* Initial container
-            Container(color: Colors.pink,
-              width: 300,
-              height: 300,
-              child: Center(
-                child: Text('Text 1'),
-              )
-            )*/
           ]
         )
       ),
